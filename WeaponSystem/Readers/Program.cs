@@ -10,6 +10,7 @@ namespace Readers
     {
         static void Main(string[] args)
         {
+            FileUnziper.UnzipFile("Weapons - Inventory.zip", "UnZippedFiles");
         }
     }
 }

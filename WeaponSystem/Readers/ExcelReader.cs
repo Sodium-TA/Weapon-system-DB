@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using Ionic.Zip;
 
-
     public class ExcelReader
     {
         ZipFile test = new ZipFile();

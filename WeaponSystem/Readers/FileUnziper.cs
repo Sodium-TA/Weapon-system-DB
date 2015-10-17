@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Readers
+﻿namespace Readers
 {
-    class FileUnziper
+    using System;
+    using Ionic.Zip;
+
+   public static class FileUnziper
     {
+       public static void UnzipFile(string filePath, string extractionFolderPath)
+       {
+           using (ZipFile zip = ZipFile.Read(filePath))
+           {
+               foreach (ZipEntry zippedFile in zip)
+               {
+                   zippedFile.Extract(extractionFolderPath, ExtractExistingFileAction.OverwriteSilently);
+               }
+           }
+       }
     }
 }
