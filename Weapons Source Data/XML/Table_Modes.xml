@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+  <row Id="1" Mode="Semi-automatic" ></row>
+  <row Id="2" Mode="Automatic" ></row>
+  <row Id="3" Mode="Fully-automatic" ></row>
+  <row Id="4" Mode="Pump action" ></row>
+  <row Id="5" Mode="Bolt-action" ></row>
+</rows>
