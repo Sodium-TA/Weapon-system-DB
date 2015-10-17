@@ -1,14 +1,18 @@
 ﻿namespace WeaponSystem.TestConsoleClient
 {
     using System.Linq;
-    using WeaponSystem.MsSql.Data;
+    using MsSql.Data;
+    using System.Data.Entity;
+    using MsSql.Data.Migrations;
 
     class Startup
     {
         static void Main(string[] args)
         {
-            var db = new WeaponSystemContext();
 
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
+
+            var db = new WeaponSystemContext();
             db.Weapons.ToList();
             db.SaveChanges();
         }

@@ -2,9 +2,8 @@
 {
     public enum WeaponType
     {
-        Contemporary = 1,
-        Future = 2,
-        Ancient = 3,
-        Mythical = 4
+        CloseRange = 1,
+        MediumRange = 2,
+        LongRange = 3
     }
 }

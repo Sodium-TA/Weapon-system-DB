@@ -26,12 +26,12 @@
 
         public virtual WeaponCategory WeaponCategory { get; set; }
 
+        public int ManufacturerId { get; set; }
+
+        public virtual Manufacturer Manufacturer { get; set; }
+
         [MaxLength(150)]
         public string Description { get; set; }
-
-        public  int CountryId { get; set; }
-
-        public virtual Country Country { get; set; }
 
         public ushort RelaseYear { get; set; }
 
