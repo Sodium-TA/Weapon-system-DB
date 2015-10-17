@@ -26,6 +26,10 @@
 
         public virtual WeaponCategory WeaponCategory { get; set; }
 
+        public int ManufacturerId { get; set; }
+
+        public virtual Manufacturer Manufacturer { get; set; }
+
         [MaxLength(150)]
         public string Description { get; set; }
 

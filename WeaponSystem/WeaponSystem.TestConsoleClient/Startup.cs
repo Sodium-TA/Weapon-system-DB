@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.TestConsoleClient
+﻿using WeaponSystem.Models;
+
+namespace WeaponSystem.TestConsoleClient
 {
     using System.Linq;
     using WeaponSystem.MsSql.Data;
@@ -8,7 +10,6 @@
         static void Main(string[] args)
         {
             var db = new WeaponSystemContext();
-
             db.Weapons.ToList();
             db.SaveChanges();
         }
