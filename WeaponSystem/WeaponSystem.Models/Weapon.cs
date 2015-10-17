@@ -41,6 +41,10 @@
         {
             get { return this.targets; }
             set { this.targets = value; }
-        } 
+        }
+
+        public int CaliberId { get; set; }
+
+        public virtual WeaponCaliber Caliber { get; set; }
     }
 }
