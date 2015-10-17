@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+  <row Id="1" Country="Austria" ></row>
+  <row Id="2" Country="Belgium" ></row>
+  <row Id="3" Country="Czech Republic" ></row>
+  <row Id="4" Country="France" ></row>
+  <row Id="5" Country="Germany" ></row>
+  <row Id="6" Country="Israel" ></row>
+  <row Id="7" Country="Italy" ></row>
+  <row Id="8" Country="Russia" ></row>
+  <row Id="9" Country="South Africa" ></row>
+  <row Id="10" Country="Sweden" ></row>
+  <row Id="11" Country="Switzerland" ></row>
+  <row Id="12" Country="UK" ></row>
+  <row Id="13" Country="USA" ></row>
+</rows>

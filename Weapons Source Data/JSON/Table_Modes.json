@@ -1,0 +1,5 @@
+[{"Id":1,"Mode":"Semi-automatic"},
+{"Id":2,"Mode":"Automatic"},
+{"Id":3,"Mode":"Fully-automatic"},
+{"Id":4,"Mode":"Pump action"},
+{"Id":5,"Mode":"Bolt-action"}]
