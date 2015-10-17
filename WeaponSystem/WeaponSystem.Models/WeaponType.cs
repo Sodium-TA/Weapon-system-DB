@@ -1,6 +1,6 @@
 ﻿namespace WeaponSystem.Models
 {
-    public enum Type
+    public enum WeaponType
     {
         Contemporary = 1,
         Future = 2,

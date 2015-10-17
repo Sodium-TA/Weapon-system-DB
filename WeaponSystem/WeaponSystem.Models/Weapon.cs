@@ -20,7 +20,7 @@
 
         public int TypeId { get; set; }
 
-        public virtual Type Type { get; set; }
+        public virtual WeaponType WeaponType { get; set; }
 
         public int WeaponCategoryId { get; set; }
 

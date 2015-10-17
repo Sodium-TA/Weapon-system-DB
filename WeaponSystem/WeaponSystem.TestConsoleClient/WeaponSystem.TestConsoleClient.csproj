@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{346D4EE3-8CBD-4884-9D1B-95EBF17C02D2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{CB187DBB-015D-4E27-BA10-D2FC2BC17A2C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WeaponSystem.Models</RootNamespace>
-    <AssemblyName>WeaponSystem.Models</AssemblyName>
+    <RootNamespace>WeaponSystem.TestConsoleClient</RootNamespace>
+    <AssemblyName>WeaponSystem.TestConsoleClient</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -49,17 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Country.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Target.cs" />
-    <Compile Include="TargetCategory.cs" />
-    <Compile Include="WeaponType.cs" />
-    <Compile Include="Weapon.cs" />
-    <Compile Include="WeaponCategory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeaponSystem.Models\WeaponSystem.Models.csproj">
+      <Project>{346d4ee3-8cbd-4884-9d1b-95ebf17c02d2}</Project>
+      <Name>WeaponSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeaponSystem.MsSql.Data\WeaponSystem.MsSql.Data.csproj">
+      <Project>{bedd08a9-40e4-41bb-8abb-755aa18f9afd}</Project>
+      <Name>WeaponSystem.MsSql.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
