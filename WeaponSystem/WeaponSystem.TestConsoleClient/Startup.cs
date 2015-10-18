@@ -12,9 +12,13 @@
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
 
-            var db = new WeaponSystemContext();
-            db.Weapons.ToList();
-            db.SaveChanges();
+            //var db = new WeaponSystemContext();
+            //db.Weapons.ToList();
+            //db.SaveChanges();
+
+          //  var mongoHendler = new MondoDbHandler();
+           // mongoHendler.GetMongoData();
+
         }
     }
 }

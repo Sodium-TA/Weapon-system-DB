@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WeaponSystem.WpfClient.Views.MainWindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeaponSystem.WpfClient.Views"
+             mc:Ignorable="d" 
+               xmlns:vms="clr-namespace:WeaponSystem.WpfClient.Helpers"
+             d:DesignHeight="600" d:DesignWidth="600"
+             DataContext="{x:Static vms:ViewModelsSelector.MainWindowViewModel}">
+    <Grid>
+        <StackPanel 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Width="500" 
+                Height="550"
+                >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="70">
+                <TextBlock Text="DB mess maker" 
+                        x:Name="myLabel"  
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        FontSize="50" 
+                        Height="Auto" 
+                           Foreground="White"/>
+                <!--<local:AudioNavigationView Margin="25,0,0,15"/>-->
+            </StackPanel>
+            <TextBlock Text="by Sodium Team" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        FontSize="20" 
+                        Foreground="Yellow"
+                        Height="Auto"
+                        Margin="0,0,0, 50"
+                       />
+
+
+            <Button  Content="Create SQL DB"  
+                     Style="{StaticResource CommonButton}"
+                     Command="{Binding CreateSqlDb}"
+                
+                    />
+
+            <Button  Content="Get MongoDB data"  
+                     Style="{StaticResource CommonButton}"
+                     IsEnabled="{Binding IsGetMOngoDataActive}"
+                     Command="{Binding GetMongoDbData}"
+                    />
+
+            <Button  Content="Quit" 
+                     Style="{StaticResource CommonButton}"
+                     Command="{Binding QuitApplication}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
