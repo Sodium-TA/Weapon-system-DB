@@ -1,31 +1,30 @@
-﻿namespace WeaponSystem.ReportsGeneratorXML
+﻿namespace WeaponSystem.Reports
 {
-    using System;
     using System.Linq;
     using System.Text;
     using System.Xml;
     using WeaponSystem.MsSql.Data;
 
-    public static class GeneratorXml
+    public class ReportXml
     {
-        private static void GenerateXmlReport()
+        public void GenerateXmlReport()
         {
             var weapons = new WeaponSystemContext();
 
             var queryResult =
                 from weapon in weapons.Weapons
                 join manufacturer in weapons.Manufacturers
-                on weapon.ManufacturerId equals manufacturer.Id
+                    on weapon.ManufacturerId equals manufacturer.Id
                 select new
                 {
                     WeaponName = weapon.Name,
                     WeaponManufacturer = manufacturer.Name
                 };
 
-            string reportLocation = "../../Report.xml";
-            Encoding encoding = Encoding.GetEncoding("windows-1251");
+            string reportLocation = "../../Generated Reports/Report.xml";
+            var encoding = Encoding.GetEncoding("windows-1251");
 
-            using (XmlTextWriter writer = new XmlTextWriter(reportLocation, encoding))
+            using (var writer = new XmlTextWriter(reportLocation, encoding))
             {
                 writer.Formatting = Formatting.Indented;
                 writer.IndentChar = '\t';
@@ -45,12 +44,6 @@
 
                 writer.WriteEndDocument();
             }
-        }
-
-        public static void Main()
-        {
-            GenerateXmlReport();
-            Console.WriteLine("XML Report successfully generated.");
         }
     }
 }

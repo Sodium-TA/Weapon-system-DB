@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<weapons>
+	<weapon name="AK-47" manufacturer="Arsenal Kazanlak" />
+	<weapon name="Baba-Dona" manufacturer="Arsenal Kazanlak" />
+</weapons>

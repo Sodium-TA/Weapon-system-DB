@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ReportsGeneratorXML")]
+[assembly: AssemblyTitle("WeaponSystem.Reports")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ReportsGeneratorXML")]
+[assembly: AssemblyProduct("WeaponSystem.Reports")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2f72990f-addc-43dc-97cd-433169ebbc3d")]
+[assembly: Guid("9cd8aeb5-4982-439f-b64a-1890d6f33e2f")]
 
 // Version information for an assembly consists of the following four values:
 //
