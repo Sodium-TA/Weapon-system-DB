@@ -115,6 +115,7 @@
                 var repo = new MongoDbRepository();
 
                 var weaponCategories = (await repo.GetWeaponCategories()).ToList();
+                var targetCategories = (await repo.GetTargetCategories()).ToList();
 
                 var ctx = new WeaponSystemContext();
                 using (ctx)
@@ -124,7 +125,14 @@
                         if (!ctx.WeaponCategoies.Any(c => c.Name == cat.Name))
                         {
                             ctx.WeaponCategoies.Add(cat);
-                            MessageBox.Show(cat.Name);
+                        }
+                    }
+
+                    foreach (var cat in targetCategories)
+                    {
+                        if (!ctx.WeaponCategoies.Any(c => c.Name == cat.Name))
+                        {
+                            ctx.TargetCategories.Add(cat);
                         }
                     }
 

@@ -16,15 +16,23 @@
         private static readonly MongoClient Client = new MongoClient(ConnectionString);
         private static readonly IMongoDatabase Database = Client.GetDatabase("weapon-system");
 
-        private static readonly IMongoCollection<BsonDocument> Collection =
-            Database.GetCollection<BsonDocument>("WeaponCategoies");
+        private static readonly IMongoCollection<BsonDocument> WeaponCategoriesCollection = Database.GetCollection<BsonDocument>("WeaponCategoies");
+        private static readonly IMongoCollection<BsonDocument> TargetsCategoriesCollection = Database.GetCollection<BsonDocument>("TargetCategories");
 
         public async Task<IList<WeaponCategory>> GetWeaponCategories()
         {
-            var wc = (await Collection.Find(new BsonDocument()).ToListAsync())
+            var weaponCategories = (await WeaponCategoriesCollection.Find(new BsonDocument()).ToListAsync())
                 .Select(bs => BsonSerializer.Deserialize<WeaponCategory>(bs)).ToList();
 
-            return wc;
+            return weaponCategories;
+        }
+
+        public async Task<IList<TargetCategory>> GetTargetCategories()
+        {
+            var targetCategories = (await TargetsCategoriesCollection.Find(new BsonDocument()).ToListAsync())
+                .Select(bs => BsonSerializer.Deserialize<TargetCategory>(bs)).ToList();
+
+            return targetCategories;
         }
     }
 }
