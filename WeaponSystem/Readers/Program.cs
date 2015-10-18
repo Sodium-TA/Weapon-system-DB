@@ -12,38 +12,19 @@ namespace Readers
         static void Main()
         {
             FileUnziper.UnzipFile("Debug.zip", "UnZippedFiles");
+
+            var megaCollection = new List<List<List<string>>>(); 
+
             foreach (var file in FileUnziper.Files)
             {
-
                 var excelContent = ExcelReader.ReadExcelFile(file);
                 // Still in test mode.. all this will be extracted as method
                 string xmlAsString = excelContent.GetXml();
 
-                var collection = new List<List<string>>();
-
-                var xmlDoc = XDocument.Parse(xmlAsString);
-                var element = xmlDoc.Descendants().Skip(1);
-
-
-                foreach (var test in element)
-                {
-
-                    var currentWeapon = new List<string>();
-                    var i = 0;
-                    foreach (var sub in test.Descendants())
-                    {
-                        currentWeapon.Add(sub.Value);
-                        i++;
-                    }
-
-                    if (i != 0)
-                    {
-                        collection.Add(currentWeapon);
-                    }
-
-                }
-                Console.WriteLine(collection.Count);
+               megaCollection.Add(XmlReader.ParseXml(xmlAsString));
             }
+
+            Console.WriteLine(megaCollection.Count);
         }
     }
 }
