@@ -9,8 +9,6 @@
 
     public static class ExcelReader
     {
-        private const string FilePathExtention = ".xlsx";
-
         public static DataSet ReadExcelFile(string filePath)
         {
             DataSet dataSet = new DataSet();
@@ -63,7 +61,7 @@
             // XLSX - Excel 2007, 2010, 2012, 2013
             props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
             props["Extended Properties"] = "Excel 12.0 XML";
-            props["Data Source"] = filePath + FilePathExtention;
+            props["Data Source"] = filePath;
 
             // XLS - Excel 2003 and Older
             //props["Provider"] = "Microsoft.Jet.OLEDB.4.0";

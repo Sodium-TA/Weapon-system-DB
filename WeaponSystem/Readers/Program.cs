@@ -11,36 +11,39 @@ namespace Readers
     {
         static void Main()
         {
-            FileUnziper.UnzipFile("Weapons - Inventory.zip", "UnZippedFiles");
-            var excelContent = ExcelReader.ReadExcelFile("W"); // Still in test mode.. all this will be extracted as method
-            string xmlAsString = excelContent.GetXml();
-
-            var collection = new List<List<string>>();
-
-            var xmlDoc = XDocument.Parse(xmlAsString);
-            var element = xmlDoc.Descendants().Skip(1);
-
-
-            foreach (var test in element)
+            FileUnziper.UnzipFile("Debug.zip", "UnZippedFiles");
+            foreach (var file in FileUnziper.Files)
             {
 
-                var currentWeapon = new List<string>();
-                var i = 0;
-                foreach (var sub in test.Descendants())
-                {
-                    currentWeapon.Add(sub.Value);
-                    i++;
-                }
+                var excelContent = ExcelReader.ReadExcelFile(file);
+                // Still in test mode.. all this will be extracted as method
+                string xmlAsString = excelContent.GetXml();
 
-                if (i != 0)
+                var collection = new List<List<string>>();
+
+                var xmlDoc = XDocument.Parse(xmlAsString);
+                var element = xmlDoc.Descendants().Skip(1);
+
+
+                foreach (var test in element)
                 {
-                    collection.Add(currentWeapon);
+
+                    var currentWeapon = new List<string>();
+                    var i = 0;
+                    foreach (var sub in test.Descendants())
+                    {
+                        currentWeapon.Add(sub.Value);
+                        i++;
+                    }
+
+                    if (i != 0)
+                    {
+                        collection.Add(currentWeapon);
+                    }
+
                 }
-                
+                Console.WriteLine(collection.Count);
             }
-            Console.WriteLine(collection.Count); //The Collection is somewath strange but still it gets all weapons form all sheets
-
-            Console.ReadKey();
         }
     }
 }
