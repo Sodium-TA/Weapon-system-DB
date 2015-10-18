@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-
     public class Country
     {
         private ICollection<Manufacturer> manufacturers;
@@ -22,8 +21,9 @@
         [Index(IsUnique = true)]
         public string Name { get; set; }
 
+        [Required]
         [MaxLength(2)]
-        public  string Code { get; set; }
+        public string Code { get; set; }
 
         public virtual ICollection<Manufacturer> Manufacturers
         {

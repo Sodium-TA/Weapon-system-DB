@@ -16,6 +16,7 @@
         public int Id { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string Name { get; set; }
 
         public int TypeId { get; set; }
@@ -26,7 +27,7 @@
 
         public virtual WeaponCategory WeaponCategory { get; set; }
 
-        public int ManufacturerId { get; set; }
+        public int? ManufacturerId { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
 
@@ -35,12 +36,14 @@
 
         public ushort RelaseYear { get; set; }
 
-        public byte[] Image { get; set; }
+        public int? ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         public virtual ICollection<Target> Targets
         {
             get { return this.targets; }
             set { this.targets = value; }
-        } 
+        }
     }
 }

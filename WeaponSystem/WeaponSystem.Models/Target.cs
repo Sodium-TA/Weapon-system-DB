@@ -23,7 +23,7 @@
 
         public virtual TargetCategory TargetCategory { get; set; }
 
-        public virtual ICollection<Weapon>  Weapons
+        public virtual ICollection<Weapon> Weapons
         {
             get { return this.weapons; }
             set { this.weapons = value; }
