@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponSystem.Models", "WeaponSystem.Models\WeaponSystem.Models.csproj", "{346D4EE3-8CBD-4884-9D1B-95EBF17C02D2}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponSystem.TestConsoleClient", "WeaponSystem.TestConsoleClient\WeaponSystem.TestConsoleClient.csproj", "{CB187DBB-015D-4E27-BA10-D2FC2BC17A2C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Readers", "Readers\Readers.csproj", "{25902B68-ED87-4E9A-BBE8-615E288FB7F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsGeneratorPDF", "ReportsGeneratorPDF\ReportsGeneratorPDF.csproj", "{A8176837-89EE-484E-8B3D-94544FEC2305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{25902B68-ED87-4E9A-BBE8-615E288FB7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25902B68-ED87-4E9A-BBE8-615E288FB7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25902B68-ED87-4E9A-BBE8-615E288FB7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8176837-89EE-484E-8B3D-94544FEC2305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8176837-89EE-484E-8B3D-94544FEC2305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8176837-89EE-484E-8B3D-94544FEC2305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8176837-89EE-484E-8B3D-94544FEC2305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
