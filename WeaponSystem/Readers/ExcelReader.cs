@@ -4,11 +4,83 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
-    using Ionic.Zip;
+    using System.Data;
+    using System.Data.OleDb;
 
-    public class ExcelReader
+    public static class ExcelReader
     {
-        ZipFile test = new ZipFile();
+        private const string FilePathExtention = ".xlsx";
+
+        public static DataSet ReadExcelFile(string filePath)
+        {
+            DataSet dataSet = new DataSet();
+
+            string connectionString = GetConnectionString(filePath);
+
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+                connection.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+
+                // Get all Sheets in Excel File
+                DataTable dtSheet = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+
+                // Loop through all Sheets to get data
+                foreach (DataRow dr in dtSheet.Rows)
+                {
+
+                    string sheetName = dr["TABLE_NAME"].ToString();
+
+                    if (!sheetName.Contains("$"))
+                    {
+                        continue;
+                    }
+
+                    // Get all rows from the Sheet
+                    command.CommandText = "SELECT * FROM [" + sheetName + "]";
+
+                    DataTable dt = new DataTable();
+                    dt.TableName = sheetName;
+
+                    OleDbDataAdapter da = new OleDbDataAdapter(command);
+                    da.Fill(dt);
+
+                    dataSet.Tables.Add(dt);
+                }
+
+                command = null;
+                connection.Close();
+            }
+
+            return dataSet;
+        }
+
+        private static string GetConnectionString(string filePath)
+        {
+            Dictionary<string, string> props = new Dictionary<string, string>();
+
+            // XLSX - Excel 2007, 2010, 2012, 2013
+            props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
+            props["Extended Properties"] = "Excel 12.0 XML";
+            props["Data Source"] = filePath + FilePathExtention;
+
+            // XLS - Excel 2003 and Older
+            //props["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            //props["Extended Properties"] = "Excel 8.0";
+            //props["Data Source"] = "C:\\MyExcel.xls";
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (KeyValuePair<string, string> prop in props)
+            {
+                sb.Append(prop.Key);
+                sb.Append('=');
+                sb.Append(prop.Value);
+                sb.Append(';');
+            }
+
+            return sb.ToString();
+        }
     }
 }
