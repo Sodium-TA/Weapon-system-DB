@@ -1,5 +1,6 @@
 ﻿namespace WeaponSystem.ReportsGeneratorPDF
 {
+    using System;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -11,12 +12,11 @@
     {
         private const float FontSize = 10f;
 
-        public static void GeneratePdfReport()
+        private static void GeneratePdfReport()
         {
-            string executionFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string reportFile = Path.Combine(executionFolder, "Report.pdf");
+            string reportLocation = "../../Report.pdf";
 
-            var fs = new FileStream(reportFile, FileMode.Create);
+            var fs = new FileStream(reportLocation, FileMode.Create);
             
             var document = new Document(PageSize.A4, 25, 25, 30, 30);
 
@@ -106,6 +106,7 @@
         public static void Main()
         {
             GeneratePdfReport();
+            Console.WriteLine("PDF Report successfully generated.");
         }
     }
 }
