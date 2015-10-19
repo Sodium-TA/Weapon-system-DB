@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponSystem.WpfClient", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponSystem.Reports", "WeaponSystem.Reports\WeaponSystem.Reports.csproj", "{05EB8CEC-2A4B-4406-AF07-50AD296C87E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponSystem.Transfers", "WeaponSystem.Transfers\WeaponSystem.Transfers.csproj", "{310ADFFB-FCED-4334-86CA-AFB3905B2363}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{05EB8CEC-2A4B-4406-AF07-50AD296C87E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05EB8CEC-2A4B-4406-AF07-50AD296C87E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05EB8CEC-2A4B-4406-AF07-50AD296C87E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310ADFFB-FCED-4334-86CA-AFB3905B2363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310ADFFB-FCED-4334-86CA-AFB3905B2363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310ADFFB-FCED-4334-86CA-AFB3905B2363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310ADFFB-FCED-4334-86CA-AFB3905B2363}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

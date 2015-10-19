@@ -1,28 +1,23 @@
 ﻿namespace WeaponSystem.WpfClient.ViewModels
 {
-    using System.ComponentModel;
-    using System.Windows.Input;
-    using WeaponSystem.WpfClient.Commands;
-
     using System;
-    using System.Data.Entity;
-    using System.Linq;
     using System.Windows.Forms;
-    using WeaponSystem.MongoDb.Data;
+    using System.Windows.Input;
+
     using WeaponSystem.MsSql.Data;
-    using WeaponSystem.MsSql.Data.Migrations;
+    using WeaponSystem.Transfers;
+    using WeaponSystem.WpfClient.Commands;
 
     public class MainWindowViewModel : BaseViewModel
     {
-        private bool isGetMOngoDataActive = false;
+        private ICommand createSqlDbCommand;
 
         private ICommand getMongoDbDataCommand;
 
-        private ICommand createSqlDbCommand;
+        private ICommand getZipDataCommand;
+        private bool isGetMOngoDataActive;
 
         private ICommand quitApplicationCommand;
-
-        private ICommand getZipDataCommand;
 
         public bool IsGetMOngoDataActive
         {
@@ -30,6 +25,7 @@
             {
                 return this.isGetMOngoDataActive;
             }
+
             set
             {
                 this.isGetMOngoDataActive = value;
@@ -75,6 +71,7 @@
                 return this.getZipDataCommand;
             }
         }
+
         private void GtZipDataCommand(object parameter)
         {
             MessageBox.Show("ZIpdata loaded");
@@ -91,99 +88,41 @@
                 await repo.CreteDb();
 
                 this.IsGetMOngoDataActive = true;
-                MessageBox.Show("SQL DB created",
-                    "SQL DB creation");
-
+                MessageBox.Show("SQL DB created", "SQL DB creation");
             }
             catch (Exception ex)
             {
                 var exmes = ex.Message;
-                MessageBox.Show(exmes,
-                    "SQL DB creation");
+                MessageBox.Show(exmes, "SQL DB creation");
             }
         }
 
         private async void HandleGetMongoDbDataCommand(object parameter)
         {
-          // Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
-          this.IsGetMOngoDataActive = false;
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
+            this.IsGetMOngoDataActive = false;
 
             try
             {
-                var repo = new MongoDbRepository();
+                var agent = new MongoDbToMsSqlAgent();
 
-                var weaponCategories = (await repo.GetWeaponCategories()).ToList();
-                using (WeaponSystemContext ctx = new WeaponSystemContext())
-                {
-                    foreach (var cat in weaponCategories)
-                    {
-                        if (!ctx.WeaponCategoies.Any(c => c.Name == cat.Name))
-                        {
-                            ctx.WeaponCategoies.Add(cat);
-                        }
-                    }
+                var msgWC = await agent.TransferWeaponCategories();
+                MessageBox.Show(msgWC);
 
-                    ctx.SaveChanges();
+                var msgTC = await agent.TransferTargetCategories();
+                MessageBox.Show(msgTC);
 
-                    MessageBox.Show("Weapon Categories from mongoDB taken!");
-                }
+                var msgC = await agent.TransferCountries();
+                MessageBox.Show(msgC);
 
-                var targetCategories = (await repo.GetTargetCategories()).ToList();
-                using (WeaponSystemContext ctx = new WeaponSystemContext())
-                {
-                    foreach (var cat in targetCategories)
-                    {
-                        if (!ctx.TargetCategories.Any(c => c.Name == cat.Name))
-                        {
-                            ctx.TargetCategories.Add(cat);
-                        }
-                    }
-
-                    ctx.SaveChanges();
-
-                    MessageBox.Show("Target Categories from mongoDB taken!");
-                }
-
-                var countries = (await repo.GetCountries()).ToList();
-                using (WeaponSystemContext ctx = new WeaponSystemContext())
-                {
-                    foreach (var cou in countries)
-                    {
-                        if (!ctx.Countries.Any(c => c.Name == cou.Name))
-                        {
-                            ctx.Countries.Add(cou);
-                        }
-                    }
-
-                    ctx.SaveChanges();
-
-                    MessageBox.Show("Countries from mongoDB taken!");
-                }
-
-
-                var manufacturers = (await repo.GetManufacturers()).ToList();
-                using (WeaponSystemContext ctx = new WeaponSystemContext())
-                {
-                    foreach (var man in manufacturers)
-                    {
-                        if (!ctx.Manufacturers.Any(c => c.Name == man.Name))
-                        {
-                            ctx.Manufacturers.Add(man);
-                        }
-                    }
-
-                    ctx.SaveChanges();
-
-                    MessageBox.Show("Manufacturers from mongoDB taken!");
-                }
+                var msgM = await agent.TransferManufacturers();
+                MessageBox.Show(msgM);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    ex.Message,
-                    "MongoDb");
+                    ex.Message, "MongoDb");
             }
         }
     }
 }
-

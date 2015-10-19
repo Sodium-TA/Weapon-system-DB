@@ -4,19 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD8FDC7C-A586-4CC3-B237-AD2A25DB4FDF}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{310ADFFB-FCED-4334-86CA-AFB3905B2363}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WeaponSystem.WpfClient</RootNamespace>
-    <AssemblyName>WeaponSystem.WpfClient</AssemblyName>
+    <RootNamespace>WeaponSystem.Transfers</RootNamespace>
+    <AssemblyName>WeaponSystem.Transfers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,80 +40,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Contracts\ISwitchable.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\MainWindowView.xaml.cs">
-      <DependentUpon>MainWindowView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\ViewModelSelector.cs" />
-    <Compile Include="Helpers\ViewSelector.cs" />
-    <Compile Include="Helpers\ViewSwitcher.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\MainWindowView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="MongoDbToMsSqlAgent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Readers\Readers.csproj">
@@ -134,20 +66,21 @@
       <Name>WeaponSystem.MongoDb.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeaponSystem.MsSql.Data\WeaponSystem.MsSql.Data.csproj">
-      <Project>{BEDD08A9-40E4-41BB-8ABB-755AA18F9AFD}</Project>
+      <Project>{bedd08a9-40e4-41bb-8abb-755aa18f9afd}</Project>
       <Name>WeaponSystem.MsSql.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeaponSystem.Reports\WeaponSystem.Reports.csproj">
       <Project>{05eb8cec-2a4b-4406-af07-50ad296c87e1}</Project>
       <Name>WeaponSystem.Reports</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WeaponSystem.Transfers\WeaponSystem.Transfers.csproj">
-      <Project>{310adffb-fced-4334-86ca-afb3905b2363}</Project>
-      <Name>WeaponSystem.Transfers</Name>
+    <ProjectReference Include="..\WeaponSystem.TestConsoleClient\WeaponSystem.TestConsoleClient.csproj">
+      <Project>{cb187dbb-015d-4e27-ba10-d2fc2bc17a2c}</Project>
+      <Name>WeaponSystem.TestConsoleClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\background.png" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
