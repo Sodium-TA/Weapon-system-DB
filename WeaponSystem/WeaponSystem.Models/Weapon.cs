@@ -23,7 +23,7 @@
 
         public virtual WeaponType WeaponType { get; set; }
 
-        public int WeaponCategoryId { get; set; }
+        public int? WeaponCategoryId { get; set; }
 
         public virtual WeaponCategory WeaponCategory { get; set; }
 
