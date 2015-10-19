@@ -19,8 +19,6 @@ namespace WeaponSystem.TestConsoleClient
            db.Weapons.ToList();
             db.SaveChanges();
 
-           var mongoHendler = new MondoDbHandler();
-           mongoHendler.GetMongoData();
 
 
             var i = 0;
