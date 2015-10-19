@@ -7,7 +7,7 @@ namespace WeaponSystem.TestConsoleClient
     using System.Data.Entity;
     using System.Linq;
     using MsSql.Data;
-    
+
     using MsSql.Data.Migrations;
     using Readers;
 
@@ -18,17 +18,14 @@ namespace WeaponSystem.TestConsoleClient
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
 
             var db = new WeaponSystemContext();
-           db.Weapons.ToList();
+            db.Weapons.ToList();
             db.SaveChanges();
-
-           //var mongoHendler = new MondoDbHandler();
-           //mongoHendler.GetMongoData();
-
-
+            //var test4 = ExcelReader.GetExcelFilesAsCollection("../../w.zip");
+       
             var i = 0;
-            var megaCollection = ExcelReader.GetExcelFilesAsCollection();
+            var megaCollection = ExcelReader.GetExcelFilesAsCollection("../../w.zip");
             var weaponsCat = db.WeaponCategoies.Find(1);
-            
+
             foreach (var collection in megaCollection)
             {
                 foreach (var weapon in collection)
@@ -45,13 +42,13 @@ namespace WeaponSystem.TestConsoleClient
                     weapons.Targets = null;
                     db.Weapons.Add(weapons);
 
-                    Console.WriteLine( weapons.Name );  
+                    Console.WriteLine(weapons.Name);
                 }
+
                 i++;
             }
 
             db.SaveChanges();
-
         }
     }
 }

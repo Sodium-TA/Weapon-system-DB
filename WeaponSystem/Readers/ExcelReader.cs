@@ -9,10 +9,11 @@
 
     public static class ExcelReader
     {
-
-        public static List<List<List<string>>> GetExcelFilesAsCollection()
+        private const string ExtractionFilePath = "../../UnZippedFiles";
+        private const string RelativeFolderPath = "../../";
+        public static List<List<List<string>>> GetExcelFilesAsCollection(string pathToZipFile)
         {
-            FileUnziper.UnzipFile("w.zip", "UnZippedFiles");
+            FileUnziper.UnzipFile(pathToZipFile, ExtractionFilePath);
 
             var megaCollection = new List<List<List<string>>>();
 
@@ -32,7 +33,7 @@
         {
             DataSet dataSet = new DataSet();
 
-            string connectionString = GetConnectionString(filePath);
+            string connectionString = GetConnectionString(ExtractionFilePath + "/"+ filePath);
 
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
@@ -89,7 +90,7 @@
                 // XLS - Excel 2003 and Older
                 props["Provider"] = "Microsoft.Jet.OLEDB.4.0";
                 props["Extended Properties"] = "Excel 8.0";
-                props["Data Source"] = filePath;
+                props["Data Source"] = RelativeFolderPath + filePath;
             }
 
             StringBuilder sb = new StringBuilder();

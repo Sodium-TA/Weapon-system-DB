@@ -24,7 +24,7 @@
             using (WeaponSystemContext db = new WeaponSystemContext())
             {
                 var i = 0;
-                var megaCollection = ExcelReader.GetExcelFilesAsCollection();
+                var megaCollection = ExcelReader.GetExcelFilesAsCollection("../../w.zip");
                 var weaponsCat = db.WeaponCategoies.Find(1);
 
                 foreach (var collection in megaCollection)
