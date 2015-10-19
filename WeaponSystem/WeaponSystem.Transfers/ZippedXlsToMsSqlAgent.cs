@@ -15,12 +15,6 @@
         private const string MessageEnd = " from zipped .xls transfered to MsSQL!";
         public async Task<string> TransferWeapons(string path = "put default path here")
         {
-            // await before the time cost operation 
-            /* 
-            example:     var weaponCategories = (await WeaponCategoriesCollection.Find(new BsonDocument()).ToListAsync())
-                                                    .Select(bs => BsonSerializer.Deserialize<WeaponCategory>(bs)).ToList();
-                */
-
             using (WeaponSystemContext db = new WeaponSystemContext())
             {
                 var i = 0;
@@ -29,6 +23,7 @@
 
                 foreach (var collection in megaCollection)
                 {
+                    //var category = collection.
                     foreach (var weapon in collection)
                     {
                         var weapons = new Weapon();

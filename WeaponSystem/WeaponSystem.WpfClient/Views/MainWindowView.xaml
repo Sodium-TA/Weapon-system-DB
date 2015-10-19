@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:WeaponSystem.WpfClient.Views"
              mc:Ignorable="d" 
                xmlns:vms="clr-namespace:WeaponSystem.WpfClient.Helpers"
-             d:DesignHeight="600" d:DesignWidth="600"
+             d:DesignHeight="600" d:DesignWidth="900"
              DataContext="{x:Static vms:ViewModelsSelector.MainWindowViewModel}">
     <Grid>
         <StackPanel 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
-                Width="500" 
+                Width="900" 
                 Height="550"
                 >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="70">
@@ -35,14 +35,16 @@
                        />
 
 
-            <Button  Content="Create SQL DB"  
+            <Button  Content="{Binding UniversalButttonText}"  
                      Style="{StaticResource CommonButton}"
-                      IsEnabled="{Binding IsCreateMsSqlActive}"
-                     Command="{Binding CreateSqlDb}"
+                     FontSize="25"
+                     Height="150"
+                      IsEnabled="{Binding IsUniversalButtonActive}"
+                     Command="{Binding IinitializatorDirector}"
                 
                     />
 
-            <Button  Content="Get MongoDB data"  
+            <!--<Button  Content="Get MongoDB data"  
                      Style="{StaticResource CommonButton}"
                      IsEnabled="{Binding IsGetMOngoDataActive}"
                      Command="{Binding GetMongoDbData}"
@@ -50,9 +52,9 @@
 
             <Button  Content="Get Zipped Excel data"  
                      Style="{StaticResource CommonButton}"
-                     IsEnabled="{Binding IsGetZipDataActive}"
+                     IsEnabled="{Binding IsUniversalButtonActive}"
                      Command="{Binding GetZipData}"
-                    />
+                    />-->
 
             <Button  Content="Quit" 
                      Style="{StaticResource CommonButton}"

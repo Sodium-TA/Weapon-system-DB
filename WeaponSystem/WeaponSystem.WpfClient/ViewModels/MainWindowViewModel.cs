@@ -10,93 +10,72 @@
 
     public class MainWindowViewModel : BaseViewModel
     {
-        private ICommand createSqlDbCommand;
-        private ICommand getMongoDbDataCommand;
-        private ICommand getZipDataCommand;
         private ICommand quitApplicationCommand;
+        private ICommand initializatorDirektorCommand;
 
         private bool isGetMOngoDataActive = false;
         private bool isCreateMsSqlActive = true;
-        private bool isGetZipDataActive = false;
+        private bool isUniversalButtonActive = true;
+        private string universalButttonText = "Create MsSQL DB";
 
-        public bool IsGetMOngoDataActive
+        private int step = 1;
+
+        public string UniversalButttonText
         {
             get
             {
-                return this.isGetMOngoDataActive;
+                return this.universalButttonText;
             }
 
             set
             {
-                this.isGetMOngoDataActive = value;
-                this.OnPropertyChanged("IsGetMOngoDataActive");
+                this.universalButttonText = value;
+                this.OnPropertyChanged("UniversalButttonText");
             }
         }
 
-        public bool IsGetZipDataActive
+        public bool IsUniversalButtonActive
         {
             get
             {
-                return this.isGetZipDataActive;
+                return this.isUniversalButtonActive;
             }
 
             set
             {
-                this.isGetZipDataActive = value;
-                this.OnPropertyChanged("IsGetZipDataActive");
+                this.isUniversalButtonActive = value;
+                this.OnPropertyChanged("IsUniversalButtonActive");
             }
         }
 
-        public bool IsCreateMsSqlActive
+        public ICommand IinitializatorDirector
         {
             get
             {
-                return this.isCreateMsSqlActive;
-            }
-
-            set
-            {
-                this.isCreateMsSqlActive = value;
-                this.OnPropertyChanged("IsCreateMsSqlActive");
-            }
-        }
-
-        public ICommand GetMongoDbData
-        {
-            get
-            {
-                if (this.getMongoDbDataCommand == null)
+                if (this.initializatorDirektorCommand == null)
                 {
-                    this.getMongoDbDataCommand = new RelayCommand(this.HandleGetMongoDbDataCommand);
+                    this.initializatorDirektorCommand = new RelayCommand(this.HandleIinitializatorDirectorCommand);
                 }
 
-                return this.getMongoDbDataCommand;
+                return this.initializatorDirektorCommand;
             }
         }
 
-        public ICommand CreateSqlDb
+        private void HandleIinitializatorDirectorCommand(object parameter)
         {
-            get
+            switch (this.step)
             {
-                if (this.createSqlDbCommand == null)
-                {
-                    this.createSqlDbCommand = new RelayCommand(this.HandleCreateSqlDCommand);
-                }
-
-                return this.createSqlDbCommand;
-            }
-        }
-
-        public ICommand GetZipData
-        {
-            get
-            {
-                if (this.getZipDataCommand == null)
-                {
-                    this.getZipDataCommand = new RelayCommand(this.GetZipDataCommand);
-                }
-
-                return this.getZipDataCommand;
+                case 1:
+                    this.HandleCreateSqlDCommand(null);
+                    break;
+                case 2:
+                    this.HandleGetMongoDbDataCommand(null);
+                    break;
+                case 3:
+                    this.GetZipDataCommand(null);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -104,32 +83,34 @@
         {
             try
             {
+                this.UniversalButttonText = "...getting data from zipped .xls..";
+
                 var agent = new ZippedXlsToMsSqlAgent();
 
                 var msgWC = await agent.TransferWeapons();
-                MessageBox.Show(msgWC);
+                this.UniversalButttonText = msgWC;
 
-                this.IsGetZipDataActive = false;
+                this.IsUniversalButtonActive = true;
+                this.step = 4;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message, "Zipped .xls transfer");
+                MessageBox.Show(ex.Message, "Zipped .xls transfer");
             }
         }
 
         private async void HandleCreateSqlDCommand(object parameter)
         {
-            this.IsCreateMsSqlActive = false;
-
             try
-            {
+            {   this.IsUniversalButtonActive = false;
+                this.UniversalButttonText = "...Creating MS SQL DB...";
+
                 var repo = new MsSqlRepo();
+                var testmsg = await repo.CreteDb();
 
-                await repo.CreteDb();
-
-                this.IsGetMOngoDataActive = true;
-                MessageBox.Show("SQL DB created", "SQL DB creation");
+                this.UniversalButttonText = "Get data from MongpDB";
+                this.IsUniversalButtonActive = true;
+                this.step = 2;
             }
             catch (Exception ex)
             {
@@ -140,31 +121,32 @@
 
         private async void HandleGetMongoDbDataCommand(object parameter)
         {
-            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
-            this.IsGetMOngoDataActive = false;
+            this.IsUniversalButtonActive = false;
+            this.UniversalButttonText = "...Start getting data from MongoDB...";
 
             try
             {
                 var agent = new MongoDbToMsSqlAgent();
 
                 var msgWC = await agent.TransferWeaponCategories();
-                MessageBox.Show(msgWC);
+                this.UniversalButttonText = msgWC;
 
                 var msgTC = await agent.TransferTargetCategories();
-                MessageBox.Show(msgTC);
+                this.UniversalButttonText = msgTC;
 
                 var msgC = await agent.TransferCountries();
-                MessageBox.Show(msgC);
+                this.UniversalButttonText = msgC;
 
                 var msgM = await agent.TransferManufacturers();
-                MessageBox.Show(msgM);
+                this.UniversalButttonText = msgM;
 
-                this.IsGetZipDataActive = true;
+                this.step = 3;
+                this.IsUniversalButtonActive = true;
+                this.UniversalButttonText = "Get data from zipped .xls";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    ex.Message, "MongoDb transfer");
+                MessageBox.Show(ex.Message, "MongoDb transfer");
             }
         }
     }
