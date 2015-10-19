@@ -20,8 +20,8 @@
                 var i = 0;
                 foreach (var sub in test.Descendants())
                 {
-                    currentWeapon.Add(sub.Value);
                     i++;
+                    currentWeapon.Add(sub.Value);
                 }
 
                 if (i != 0)
