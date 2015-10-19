@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="MongoDbToMsSqlAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlToMsSqlAndMongoDbAgent.cs" />
     <Compile Include="ZippedXlsToMsSqlAgent.cs" />
   </ItemGroup>
   <ItemGroup>
