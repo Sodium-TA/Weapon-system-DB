@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<calibers>
+  <caliber>0.22</caliber>
+  <caliber>0.25</caliber>
+  <caliber>0.30</caliber>
+  <caliber>0.357</caliber>
+  <caliber>0.38</caliber>
+  <caliber>0.40</caliber>
+  <caliber>0.45</caliber>
+  <caliber>0.5</caliber>
+  <caliber>5.56</caliber>
+  <caliber>7.62</caliber>
+  <caliber>9</caliber>
+  <caliber>12</caliber>
+</calibers> 
