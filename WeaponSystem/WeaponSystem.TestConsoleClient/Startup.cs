@@ -26,6 +26,7 @@ namespace WeaponSystem.TestConsoleClient
             var i = 0;
             var megaCollection = ExcelReader.GetExcelFilesAsCollection("../../w.zip");
             var weaponsCat = db.WeaponCategoies.ToList();
+            var manufacturers = db.Manufacturers.ToList();
 
             foreach (var collection in megaCollection)
             {
@@ -34,12 +35,13 @@ namespace WeaponSystem.TestConsoleClient
                     var weapon = new Weapon();
 
                     weapon.Name = weaponItem[1];
-                    weapon.Manufacturer = null;
+                    weapon.Manufacturer = GetManufacturer(manufacturers, weaponItem[2]);
                     weapon.Description = null;
                     weapon.RelaseYear = 0;
                     weapon.WeaponCategory = GetCategory(weaponsCat, weaponItem[0]);
                     weapon.ManufacturerId = null;
                     weapon.WeaponType = WeaponType.CloseRange;
+                    weapon.ImageUrl = null;
                     weapon.Targets = null;
                     db.Weapons.Add(weapon);
 
@@ -59,6 +61,19 @@ namespace WeaponSystem.TestConsoleClient
                 if (category.Name == weaponCategoryName)
                 {
                     return category;
+                }
+            }
+
+            return null;
+        }
+
+        private static Manufacturer GetManufacturer(List<Manufacturer> manufacturerCollection, string manufacturerName)
+        {
+            foreach (var manufacturer in manufacturerCollection)
+            {
+                if (manufacturer.Name == manufacturerName)
+                {
+                    return manufacturer;
                 }
             }
 
