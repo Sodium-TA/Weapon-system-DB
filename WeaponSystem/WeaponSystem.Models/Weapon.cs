@@ -1,5 +1,4 @@
-﻿
-namespace WeaponSystem.Models
+﻿namespace WeaponSystem.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
