@@ -10,7 +10,7 @@ namespace WeaponSystem.MsSql.Data
 
     public class MsSqlRepo
     {
-        public async Task CreteDb()
+        public async Task CreateDb()
         {
            Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
 
