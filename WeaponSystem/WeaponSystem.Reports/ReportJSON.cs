@@ -32,14 +32,14 @@
             return JsonSuccessMessage;
         }
 
-        private void WriteJsonObject(string id, string name, string manifacturer)
+        private void WriteJsonObject(string id, string name, string manufacturer)
         {
-            string reportLocation = "../../../Generated Reports/JSON/";
+            string reportLocation = "../../../../Generated Reports/JSON/";
 
             var jsonObject = new JObject(
                  new JProperty("weapon-id", id),
                  new JProperty("weapon-name", name),
-                 new JProperty("manufacturer", manifacturer));
+                 new JProperty("manufacturer", manufacturer));
 
             string filePath = Path.Combine(reportLocation, string.Format("{0}.json", id));
 

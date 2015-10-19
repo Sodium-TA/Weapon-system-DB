@@ -21,7 +21,7 @@
                         Manufacturer = w.Manufacturer.Name
                     });
 
-            string reportLocation = "../../../Generated Reports/XML/Report.xml";
+            string reportLocation = "../../../../Generated Reports/XML/Report.xml";
             var encoding = Encoding.GetEncoding("windows-1251");
 
             using (var writer = new XmlTextWriter(reportLocation, encoding))

@@ -6,11 +6,12 @@
     using System.Text;
     using System.Data;
     using System.Data.OleDb;
+    using System.Threading.Tasks;
 
     public static class ExcelReader
     {
-        private const string ExtractionFilePath = "../../UnZippedFiles";
-        private const string RelativeFolderPath = "../../";
+        private const string ExtractionFilePath = "../../../../UnZippedFiles";
+        private const string RelativeFolderPath = "../../../../";
         public static List<List<List<string>>> GetExcelFilesAsCollection(string pathToZipFile)
         {
             FileUnziper.UnzipFile(pathToZipFile, ExtractionFilePath);
