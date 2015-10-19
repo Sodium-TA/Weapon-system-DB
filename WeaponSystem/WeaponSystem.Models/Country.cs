@@ -22,7 +22,7 @@
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(2)]
+        [MaxLength(6)]
         public string Code { get; set; }
 
         public virtual ICollection<Manufacturer> Manufacturers

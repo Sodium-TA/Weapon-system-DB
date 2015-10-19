@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.MsSql.Data
+﻿using WeaponSystem.MsSql.Data.Migrations;
+
+namespace WeaponSystem.MsSql.Data
 {
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -10,6 +12,8 @@
     {
         public async Task CreteDb()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
+
             using (var ctx = new WeaponSystemContext())
             {
                 await ctx.Weapons.ToListAsync();

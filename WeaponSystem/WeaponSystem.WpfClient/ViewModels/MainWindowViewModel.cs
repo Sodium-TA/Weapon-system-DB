@@ -28,7 +28,6 @@
         {
             get
             {
-                //this.OnPropertyChanged("IsGetMOngoDataActive");
                 return this.isGetMOngoDataActive;
             }
             set
@@ -68,7 +67,6 @@
         {
             get
             {
-                //this.OnPropertyChanged("IsGetMOngoDataActive");
                 if (this.getZipDataCommand == null)
                 {
                     this.getZipDataCommand = new RelayCommand(this.GtZipDataCommand);
@@ -107,7 +105,7 @@
 
         private async void HandleGetMongoDbDataCommand(object parameter)
         {
-          //  Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
+          // Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
           this.IsGetMOngoDataActive = false;
 
             try
@@ -116,6 +114,7 @@
 
                 var weaponCategories = (await repo.GetWeaponCategories()).ToList();
                 var targetCategories = (await repo.GetTargetCategories()).ToList();
+                var countries = (await repo.GetCountries()).ToList();
 
                 var ctx = new WeaponSystemContext();
                 using (ctx)
@@ -133,6 +132,14 @@
                         if (!ctx.WeaponCategoies.Any(c => c.Name == cat.Name))
                         {
                             ctx.TargetCategories.Add(cat);
+                        }
+                    }
+
+                    foreach (var cou in countries)
+                    {
+                        if (!ctx.Countries.Any(c => c.Name == cou.Name))
+                        {
+                            ctx.Countries.Add(cou);
                         }
                     }
 

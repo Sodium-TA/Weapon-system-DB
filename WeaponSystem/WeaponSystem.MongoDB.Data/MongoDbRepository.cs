@@ -18,6 +18,7 @@
 
         private static readonly IMongoCollection<BsonDocument> WeaponCategoriesCollection = Database.GetCollection<BsonDocument>("WeaponCategoies");
         private static readonly IMongoCollection<BsonDocument> TargetsCategoriesCollection = Database.GetCollection<BsonDocument>("TargetCategories");
+        private static readonly IMongoCollection<BsonDocument> CountriesCollection = Database.GetCollection<BsonDocument>("Countries");
 
         public async Task<IList<WeaponCategory>> GetWeaponCategories()
         {
@@ -33,6 +34,15 @@
                 .Select(bs => BsonSerializer.Deserialize<TargetCategory>(bs)).ToList();
 
             return targetCategories;
+        }
+
+
+        public async Task<IList<Country>> GetCountries()
+        {
+            var countries = (await CountriesCollection.Find(new BsonDocument()).ToListAsync())
+                .Select(bs => BsonSerializer.Deserialize<Country>(bs)).ToList();
+
+            return countries;
         }
     }
 }

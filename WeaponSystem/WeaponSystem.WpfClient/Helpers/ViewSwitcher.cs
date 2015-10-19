@@ -1,13 +1,4 @@
-﻿// <copyright file="ViewSwitcher.cs" company="GameFifteen2Team">
-// The MIT License (MIT)
-// Copyright(c) 2015 Team "Game-Fifteen-2"
-// </copyright>
-// <summary>
-// ViewSwitcher class.
-// </summary>
-// <author>GameFifteen2Team</author>
-
-namespace WeaponSystem.WpfClient.Helpers
+﻿namespace WeaponSystem.WpfClient.Helpers
 {
     using System;
     using System.Windows.Controls;
