@@ -37,6 +37,7 @@
 
             <Button  Content="Create SQL DB"  
                      Style="{StaticResource CommonButton}"
+                      IsEnabled="{Binding IsCreateMsSqlActive}"
                      Command="{Binding CreateSqlDb}"
                 
                     />
@@ -45,6 +46,12 @@
                      Style="{StaticResource CommonButton}"
                      IsEnabled="{Binding IsGetMOngoDataActive}"
                      Command="{Binding GetMongoDbData}"
+                    />
+
+            <Button  Content="Get Zipped Excel data"  
+                     Style="{StaticResource CommonButton}"
+                     IsEnabled="{Binding IsGetZipDataActive}"
+                     Command="{Binding GetZipData}"
                     />
 
             <Button  Content="Quit" 

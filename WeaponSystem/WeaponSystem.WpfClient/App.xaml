@@ -39,6 +39,11 @@
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="Opacity" Value="0.8"/>
                 </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Gray"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
             </Style.Triggers>
         </Style>
 

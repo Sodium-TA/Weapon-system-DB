@@ -11,13 +11,13 @@
     public class MainWindowViewModel : BaseViewModel
     {
         private ICommand createSqlDbCommand;
-
         private ICommand getMongoDbDataCommand;
-
         private ICommand getZipDataCommand;
-        private bool isGetMOngoDataActive;
-
         private ICommand quitApplicationCommand;
+
+        private bool isGetMOngoDataActive = false;
+        private bool isCreateMsSqlActive = true;
+        private bool isGetZipDataActive = false;
 
         public bool IsGetMOngoDataActive
         {
@@ -30,6 +30,34 @@
             {
                 this.isGetMOngoDataActive = value;
                 this.OnPropertyChanged("IsGetMOngoDataActive");
+            }
+        }
+
+        public bool IsGetZipDataActive
+        {
+            get
+            {
+                return this.isGetZipDataActive;
+            }
+
+            set
+            {
+                this.isGetZipDataActive = value;
+                this.OnPropertyChanged("IsGetZipDataActive");
+            }
+        }
+
+        public bool IsCreateMsSqlActive
+        {
+            get
+            {
+                return this.isCreateMsSqlActive;
+            }
+
+            set
+            {
+                this.isCreateMsSqlActive = value;
+                this.OnPropertyChanged("IsCreateMsSqlActive");
             }
         }
 
@@ -59,32 +87,33 @@
             }
         }
 
-        public ICommand GtZipData
+        public ICommand GetZipData
         {
             get
             {
                 if (this.getZipDataCommand == null)
                 {
-                    this.getZipDataCommand = new RelayCommand(this.GtZipDataCommand);
+                    this.getZipDataCommand = new RelayCommand(this.GetZipDataCommand);
                 }
 
                 return this.getZipDataCommand;
             }
         }
 
-        private void GtZipDataCommand(object parameter)
+        private async void GetZipDataCommand(object parameter)
         {
             MessageBox.Show("ZIpdata loaded");
+            this.IsGetZipDataActive = false;
         }
 
         private async void HandleCreateSqlDCommand(object parameter)
         {
-            this.IsGetMOngoDataActive = false;
-
-            var repo = new MsSqlRepo();
+            this.IsCreateMsSqlActive = false;
 
             try
             {
+                var repo = new MsSqlRepo();
+
                 await repo.CreteDb();
 
                 this.IsGetMOngoDataActive = true;
@@ -117,6 +146,8 @@
 
                 var msgM = await agent.TransferManufacturers();
                 MessageBox.Show(msgM);
+
+                this.IsGetZipDataActive = true;
             }
             catch (Exception ex)
             {
