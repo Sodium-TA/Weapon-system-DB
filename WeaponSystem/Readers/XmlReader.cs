@@ -14,7 +14,7 @@
             var weaponsCollection = new List<List<string>>();
 
             var xmlDoc = XDocument.Parse(xmlAsString);
-            var element = xmlDoc.Descendants().Skip(1);
+            var element = xmlDoc.Descendants();
 
 
             foreach (var collection in element)
@@ -54,6 +54,7 @@
             doc.Load(filePath);
             var xmlString = doc.InnerXml;
 
+
             var document = XDocument.Parse(xmlString);
             var test = document.Descendants().Skip(1);
 
@@ -64,6 +65,35 @@
 
             return caliberColletion;
 
+        }
+
+        public static List<List<string>> ReadXmlCollectionFromFile(string filePath)
+        {
+            var targetCollection = new List<List<string>>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+            var xmlString = doc.InnerXml;
+
+            var document = XDocument.Parse(xmlString);
+            var test = document.Descendants().Skip(1);
+
+            foreach (var targetItem in test)
+            {
+                var i = 0;
+                var currenTarget = new List<string>();
+                foreach (var target in targetItem.Descendants())
+                {
+                    currenTarget.Add(target.Value);
+                    i++;
+                }
+
+                if (i != 0)
+                {
+                    targetCollection.Add(currenTarget);
+                }
+            }
+
+            return targetCollection;
         } 
     }
 }
