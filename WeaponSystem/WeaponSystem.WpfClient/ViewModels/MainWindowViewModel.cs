@@ -111,7 +111,7 @@ namespace WeaponSystem.WpfClient.ViewModels
 
                 var repo = new MsSqlRepo();
 
-                await repo.CreteDb();
+                await repo.CreateDb();
 
                 this.UniversalButttonText = "Get data from MongoDB";
                 this.IsUniversalButtonActive = true;
