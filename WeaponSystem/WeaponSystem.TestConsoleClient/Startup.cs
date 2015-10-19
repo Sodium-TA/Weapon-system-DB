@@ -34,7 +34,6 @@ namespace WeaponSystem.TestConsoleClient
                     var weapons = new Weapon();
 
                     weapons.Name = weapon[0];
-                    weapons.Id = i;
                     weapons.Manufacturer = null;
                     weapons.Description = null;
                     weapons.RelaseYear = 0;
