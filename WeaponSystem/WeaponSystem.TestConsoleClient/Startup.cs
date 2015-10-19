@@ -41,7 +41,7 @@ namespace WeaponSystem.TestConsoleClient
                     weapon.WeaponCategory = GetCategory(weaponsCat, weaponItem[0]);
                     weapon.ManufacturerId = null;
                     weapon.WeaponType = WeaponType.CloseRange;
-                    weapon.ImageUrl = null;
+                    weapon.ImageUrl = weaponItem[4];
                     weapon.Targets = null;
                     db.Weapons.Add(weapon);
 
