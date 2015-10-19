@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WeaponSystem.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -17,6 +19,7 @@
 
         [MaxLength(50)]
         [Required]
+        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         public int TypeId { get; set; }

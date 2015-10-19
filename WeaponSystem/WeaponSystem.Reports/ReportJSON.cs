@@ -34,7 +34,7 @@
 
         private void WriteJsonObject(string id, string name, string manifacturer)
         {
-            string reportLocation = "../../../Generated Reports/JSON/";
+            string reportLocation = "../../../../Generated Reports/JSON/";
 
             var jsonObject = new JObject(
                  new JProperty("weapon-id", id),

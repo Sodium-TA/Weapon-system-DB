@@ -110,7 +110,8 @@ namespace WeaponSystem.WpfClient.ViewModels
                 this.UniversalButttonText = "...Creating MS SQL DB...";
 
                 var repo = new MsSqlRepo();
-                var testmsg = await repo.CreteDb();
+
+                await repo.CreteDb();
 
                 this.UniversalButttonText = "Get data from MongpDB";
                 this.IsUniversalButtonActive = true;

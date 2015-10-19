@@ -13,7 +13,7 @@
 
         public string GeneratePdfReport()
         {
-            string reportLocation = "../../../Generated Reports/PDF/Report.pdf";
+            string reportLocation = "../../../../Generated Reports/PDF/Report.pdf";
 
             var fs = new FileStream(reportLocation, FileMode.Create);
 
