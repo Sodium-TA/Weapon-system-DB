@@ -54,19 +54,24 @@
             return dataSet;
         }
 
-        private static string GetConnectionString(string filePath)
+        private static string GetConnectionString(string filePath, bool enableOldExcelReading = false)
         {
             Dictionary<string, string> props = new Dictionary<string, string>();
 
-            // XLSX - Excel 2007, 2010, 2012, 2013
-            props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
-            props["Extended Properties"] = "Excel 12.0 XML";
-            props["Data Source"] = filePath;
-
-            // XLS - Excel 2003 and Older
-            //props["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            //props["Extended Properties"] = "Excel 8.0";
-            //props["Data Source"] = "C:\\MyExcel.xls";
+            if (!enableOldExcelReading)
+            {
+                // XLSX - Excel 2007, 2010, 2012, 2013
+                props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
+                props["Extended Properties"] = "Excel 12.0 XML";
+                props["Data Source"] = filePath;
+            }
+            else
+            {
+                // XLS - Excel 2003 and Older
+                props["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+                props["Extended Properties"] = "Excel 8.0";
+                props["Data Source"] = filePath;
+            }
 
             StringBuilder sb = new StringBuilder();
 
