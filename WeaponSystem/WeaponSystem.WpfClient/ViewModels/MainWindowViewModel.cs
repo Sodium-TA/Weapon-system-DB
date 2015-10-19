@@ -113,11 +113,7 @@
                 var repo = new MongoDbRepository();
 
                 var weaponCategories = (await repo.GetWeaponCategories()).ToList();
-                var targetCategories = (await repo.GetTargetCategories()).ToList();
-                var countries = (await repo.GetCountries()).ToList();
-
-                var ctx = new WeaponSystemContext();
-                using (ctx)
+                using (WeaponSystemContext ctx = new WeaponSystemContext())
                 {
                     foreach (var cat in weaponCategories)
                     {
@@ -127,14 +123,30 @@
                         }
                     }
 
+                    ctx.SaveChanges();
+
+                    MessageBox.Show("Weapon Categories from mongoDB taken!");
+                }
+
+                var targetCategories = (await repo.GetTargetCategories()).ToList();
+                using (WeaponSystemContext ctx = new WeaponSystemContext())
+                {
                     foreach (var cat in targetCategories)
                     {
-                        if (!ctx.WeaponCategoies.Any(c => c.Name == cat.Name))
+                        if (!ctx.TargetCategories.Any(c => c.Name == cat.Name))
                         {
                             ctx.TargetCategories.Add(cat);
                         }
                     }
 
+                    ctx.SaveChanges();
+
+                    MessageBox.Show("Target Categories from mongoDB taken!");
+                }
+
+                var countries = (await repo.GetCountries()).ToList();
+                using (WeaponSystemContext ctx = new WeaponSystemContext())
+                {
                     foreach (var cou in countries)
                     {
                         if (!ctx.Countries.Any(c => c.Name == cou.Name))
@@ -144,9 +156,26 @@
                     }
 
                     ctx.SaveChanges();
+
+                    MessageBox.Show("Countries from mongoDB taken!");
                 }
 
-                MessageBox.Show("Data from mongoDB taken!");
+
+                var manufacturers = (await repo.GetManufacturers()).ToList();
+                using (WeaponSystemContext ctx = new WeaponSystemContext())
+                {
+                    foreach (var man in manufacturers)
+                    {
+                        if (!ctx.Manufacturers.Any(c => c.Name == man.Name))
+                        {
+                            ctx.Manufacturers.Add(man);
+                        }
+                    }
+
+                    ctx.SaveChanges();
+
+                    MessageBox.Show("Manufacturers from mongoDB taken!");
+                }
             }
             catch (Exception ex)
             {
