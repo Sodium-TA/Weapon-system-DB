@@ -9,6 +9,25 @@
 
     public static class ExcelReader
     {
+
+        public static List<List<List<string>>> GetExcelFilesAsCollection()
+        {
+            FileUnziper.UnzipFile("w.zip", "UnZippedFiles");
+
+            var megaCollection = new List<List<List<string>>>();
+
+            foreach (var file in FileUnziper.Files)
+            {
+                var excelContent = ExcelReader.ReadExcelFile(file);
+                // Still in test mode.. all this will be extracted as method
+                string xmlAsString = excelContent.GetXml();
+
+                megaCollection.Add(XmlReader.ParseXml(xmlAsString));
+            }
+
+            return megaCollection;
+        } 
+
         public static DataSet ReadExcelFile(string filePath)
         {
             DataSet dataSet = new DataSet();
