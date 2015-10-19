@@ -19,10 +19,11 @@ namespace WeaponSystem.TestConsoleClient
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<WeaponSystemContext, Configuration>());
 
             var db = new WeaponSystemContext();
-            db.Calibers.ToList();
+
             db.SaveChanges();
 
             var caliberCollection = XmlReader.ReadXmlFile("../../../../Weapons Source Data/calibers.xml");
+            var test2 = XmlReader.ReadXmlCollectionFromFile("../../../../Weapons Source Data/targets.xml");
 
             foreach (var caliberItem in caliberCollection)
             {
