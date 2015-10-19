@@ -102,8 +102,20 @@
 
         private async void GetZipDataCommand(object parameter)
         {
-            MessageBox.Show("ZIpdata loaded");
-            this.IsGetZipDataActive = false;
+            try
+            {
+                var agent = new ZippedXlsToMsSqlAgent();
+
+                var msgWC = await agent.TransferWeapons();
+                MessageBox.Show(msgWC);
+
+                this.IsGetZipDataActive = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message, "Zipped .xls transfer");
+            }
         }
 
         private async void HandleCreateSqlDCommand(object parameter)
@@ -152,7 +164,7 @@
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    ex.Message, "MongoDb");
+                    ex.Message, "MongoDb transfer");
             }
         }
     }
