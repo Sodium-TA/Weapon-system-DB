@@ -20,6 +20,7 @@ namespace WeaponSystem.TestConsoleClient
 
             var db = new WeaponSystemContext();
             db.Calibers.ToList();
+
             db.SaveChanges();
 
             var caliberCollection = XmlReader.ReadXmlFile("../../../../Weapons Source Data/calibers.xml");
@@ -38,6 +39,7 @@ namespace WeaponSystem.TestConsoleClient
             var manufacturers = db.Manufacturers.ToList();
             var calibers = db.Calibers.ToList();
 
+            var test = db.Weapons.ToList();
 
             foreach (var collection in megaCollection)
             {
@@ -45,16 +47,25 @@ namespace WeaponSystem.TestConsoleClient
                 {
                     var weapon = new Weapon();
 
-                    weapon.Name = weaponItem[1];
-                    weapon.Manufacturer = GetManufacturer(manufacturers, weaponItem[2]);
+                    var weaponName = weaponItem[1];
+                    var weaponCategory = weaponItem[0];
+                    var weaponManufacturer = weaponItem[2];
+                    var weaponCaliber = weaponItem[3];
+                    var weaponImage = weaponItem[4];
+
+                    weapon.Name = weaponName;
+                    weapon.Manufacturer = GetManufacturer(manufacturers, weaponManufacturer);
                     weapon.Description = null;
                     weapon.RelaseYear = 0;
-                    weapon.WeaponCategory = GetCategory(weaponsCat, weaponItem[0]);
+                    weapon.WeaponCategory = GetCategory(weaponsCat, weaponCategory);
                     weapon.ManufacturerId = null;
-                    weapon.WeaponType = WeaponType.CloseRange;
-                    weapon.ImageUrl = weaponItem[4];
+                    weapon.WeaponType = GetWeaponType(weaponCategory);
+                    weapon.ImageUrl = weaponImage;
                     weapon.Targets = null;
-                    weapon.Caliber = GetCaliber(calibers, weaponItem[3]);
+                    weapon.Caliber = GetCaliber(calibers, weaponCaliber);
+
+                    
+
                     db.Weapons.Add(weapon);
 
                     Console.WriteLine(weapon.Name);
@@ -63,6 +74,21 @@ namespace WeaponSystem.TestConsoleClient
 
             db.SaveChanges();
         }
+
+        private static WeaponType GetWeaponType(string weaponCategory)
+        {
+            switch (weaponCategory)
+            {
+                case "Pistols": return WeaponType.CloseRange;
+                case "Shotguns": return WeaponType.CloseRange;
+                case "Submachene Guns": return WeaponType.CloseRange;
+                case "Rifles": return WeaponType.MediumRange;
+                case"Machine Guns": return WeaponType.MediumRange;
+                case"Sniper Rifles": return WeaponType.LongRange;
+                default: return WeaponType.CloseRange;
+            }
+
+        } 
 
         private static Caliber GetCaliber(List<Caliber> calibersCollection, string caliberSize)
         {

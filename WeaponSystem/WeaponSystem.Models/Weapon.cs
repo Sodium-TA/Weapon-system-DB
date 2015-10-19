@@ -1,8 +1,11 @@
-﻿namespace WeaponSystem.Models
+﻿using System;
+
+namespace WeaponSystem.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    [Serializable]
     public class Weapon
     {
         private ICollection<Target> targets;
