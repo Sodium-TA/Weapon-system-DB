@@ -1,5 +1,8 @@
 ﻿namespace WeaponSystem.Reports
 {
+    using System.Data.Entity;
+    using System.Threading.Tasks;
+
     using System.IO;
     using System.Linq;
     using Newtonsoft.Json.Linq;
@@ -7,42 +10,48 @@
 
     public class ReportJson
     {
-        public void GenerateJsonReport()
+        private const string JsonSuccessMessage = "JSON Report created successfully.";
+
+        public async Task<string> GenerateJsonReport()
         {
-            var msSqlServerContext = new WeaponSystemContext();
-
-            using (msSqlServerContext)
+            using (WeaponSystemContext msSqlServerContext = new WeaponSystemContext())
             {
-                var weaponsReport =
-                    from weapon in msSqlServerContext.Weapons
-                    join manufacturer in msSqlServerContext.Manufacturers
-                        on weapon.ManufacturerId equals manufacturer.Id
-                    select new
+                await msSqlServerContext
+                    .Weapons
+                    .Select(w => new
                     {
-                        WeaponId = weapon.Id,
-                        WeaponName = weapon.Name,
-                        Manufacturer = manufacturer.Name
-                    };
+                        Id = w.Id,
+                        Name = w.Name,
+                        Manufacturer = w.Manufacturer.Name
+                    })
+                    .ForEachAsync(w =>
+                        WriteJsonObject(w.Id.ToString(), w.Name, w.Manufacturer)
+                    );
+            }
 
-                foreach (var weapon in weaponsReport)
+            return JsonSuccessMessage;
+        }
+
+        private void WriteJsonObject(string id, string name, string manifacturer)
+        {
+            string reportLocation = "../../../Generated Reports/JSON/";
+
+            var jsonObject = new JObject(
+                 new JProperty("weapon-id", id),
+                 new JProperty("weapon-name", name),
+                 new JProperty("manufacturer", manifacturer));
+
+            string filePath = Path.Combine(reportLocation, string.Format("{0}.json", id));
+
+            using (var file = File.Create(filePath))
+            {
+                using (var writer = new StreamWriter(file))
                 {
-                    var jsonObject = new JObject(
-                        new JProperty("weapon-id", weapon.WeaponId),
-                        new JProperty("weapon-name", weapon.WeaponName),
-                        new JProperty("manufacturer", weapon.Manufacturer));
-
-                    string reportLocation = "../../Generated Reports/";
-                    string filePath = Path.Combine(reportLocation, string.Format("{0}.json", weapon.WeaponId));
-
-                    using (var file = File.Create(filePath))
-                    {
-                        using (var writer = new StreamWriter(file))
-                        {
-                            writer.Write(jsonObject.ToString());
-                        }
-                    }
+                    writer.Write(jsonObject.ToString());
                 }
             }
         }
     }
 }
+
+

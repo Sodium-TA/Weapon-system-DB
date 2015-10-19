@@ -18,8 +18,8 @@
             <Setter Property="Background" Value="Black" />
             <Setter Property="Foreground" Value="Yellow" />
             <Setter Property="Opacity" Value="0.8" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">

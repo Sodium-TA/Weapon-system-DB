@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.WpfClient.ViewModels
+﻿using WeaponSystem.WpfClient.Helpers;
+
+namespace WeaponSystem.WpfClient.ViewModels
 {
     using System;
     using System.Windows.Forms;
@@ -74,6 +76,8 @@
                 case 3:
                     this.GetZipDataCommand(null);
                     break;
+                case 4: this.PageSwitcher.Switch(ViewSelector.Reports);
+                    break;
                 default:
                     break;
             }
@@ -88,7 +92,7 @@
                 var agent = new ZippedXlsToMsSqlAgent();
 
                 var msgWC = await agent.TransferWeapons();
-                this.UniversalButttonText = msgWC;
+                this.UniversalButttonText = "Lest's mess with some reports";
 
                 this.IsUniversalButtonActive = true;
                 this.step = 4;

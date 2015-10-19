@@ -9,10 +9,11 @@
     public class ReportPdf
     {
         private const float FontSize = 10f;
+        private const string PdfSuccessMessage = "PDF Report created successfully.";
 
-        public void GeneratePdfReport()
+        public string GeneratePdfReport()
         {
-            string reportLocation = "../../Generated Reports/Report.pdf";
+            string reportLocation = "../../../Generated Reports/PDF/Report.pdf";
 
             var fs = new FileStream(reportLocation, FileMode.Create);
 
@@ -110,6 +111,8 @@
                 // Close the File Stream
                 fs.Close();
             }
+
+            return PdfSuccessMessage;
         }
     }
 }

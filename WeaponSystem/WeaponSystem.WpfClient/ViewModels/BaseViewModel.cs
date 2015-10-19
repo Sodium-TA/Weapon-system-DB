@@ -88,6 +88,10 @@
                         // TODO: Switch to MainMenuView when ready
                         this.PageSwitcher.Switch(ViewSelector.Main);
                         break;
+                    case "ButtonGoToReports":
+                        // TODO: Switch to MainMenuView when ready
+                        this.PageSwitcher.Switch(ViewSelector.Main);
+                        break;
                     default:
                         break;
                 }

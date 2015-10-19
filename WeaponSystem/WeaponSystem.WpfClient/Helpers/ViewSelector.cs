@@ -8,5 +8,7 @@
     public static class ViewSelector
     {
         public static readonly MainWindowView Main = new MainWindowView();
+
+        public static readonly ReportsView Reports = new ReportsView();
     }
 }

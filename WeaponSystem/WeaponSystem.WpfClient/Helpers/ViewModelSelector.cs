@@ -11,5 +11,7 @@
         /// Holds GameSettingsViewModel.
         /// </summary>
         public static readonly MainWindowViewModel MainWindowViewModel = new MainWindowViewModel();
+
+        public static readonly ReportsViewModel ReportsViewModel = new ReportsViewModel();
     }
 }

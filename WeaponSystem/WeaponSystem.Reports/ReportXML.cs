@@ -7,21 +7,21 @@
 
     public class ReportXml
     {
-        public void GenerateXmlReport()
+        private const string XmlSuccessMessage = "XML Report created successfully.";
+
+        public string GenerateXmlReport()
         {
-            var weapons = new WeaponSystemContext();
+            var msSqlServerContext = new WeaponSystemContext();
 
-            var queryResult =
-                from weapon in weapons.Weapons
-                join manufacturer in weapons.Manufacturers
-                    on weapon.ManufacturerId equals manufacturer.Id
-                select new
-                {
-                    WeaponName = weapon.Name,
-                    WeaponManufacturer = manufacturer.Name
-                };
+            var queryResult = msSqlServerContext
+                    .Weapons
+                    .Select(w => new
+                    {
+                        Name = w.Name,
+                        Manufacturer = w.Manufacturer.Name
+                    });
 
-            string reportLocation = "../../Generated Reports/Report.xml";
+            string reportLocation = "../../../Generated Reports/XML/Report.xml";
             var encoding = Encoding.GetEncoding("windows-1251");
 
             using (var writer = new XmlTextWriter(reportLocation, encoding))
@@ -36,14 +36,16 @@
                 foreach (var weapon in queryResult)
                 {
                     writer.WriteStartElement("weapon");
-                    writer.WriteAttributeString("name", weapon.WeaponName);
-                    writer.WriteAttributeString("manufacturer", weapon.WeaponManufacturer);
+                    writer.WriteAttributeString("name", weapon.Name);
+                    writer.WriteAttributeString("manufacturer", weapon.Manufacturer);
 
                     writer.WriteEndElement();
                 }
 
                 writer.WriteEndDocument();
             }
+
+            return XmlSuccessMessage;
         }
     }
 }
