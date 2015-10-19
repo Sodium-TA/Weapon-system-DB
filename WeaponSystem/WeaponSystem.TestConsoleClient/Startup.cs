@@ -1,4 +1,6 @@
-﻿using WeaponSystem.Models;
+﻿using System;
+using System.Runtime.InteropServices;
+using WeaponSystem.Models;
 
 namespace WeaponSystem.TestConsoleClient
 {
@@ -19,8 +21,8 @@ namespace WeaponSystem.TestConsoleClient
            db.Weapons.ToList();
             db.SaveChanges();
 
-           var mongoHendler = new MondoDbHandler();
-           mongoHendler.GetMongoData();
+           //var mongoHendler = new MondoDbHandler();
+           //mongoHendler.GetMongoData();
 
 
             var i = 0;
@@ -42,6 +44,8 @@ namespace WeaponSystem.TestConsoleClient
                     weapons.WeaponType = WeaponType.CloseRange;
                     weapons.Targets = null;
                     db.Weapons.Add(weapons);
+
+                    Console.WriteLine( weapons.Name );  
                 }
                 i++;
             }
