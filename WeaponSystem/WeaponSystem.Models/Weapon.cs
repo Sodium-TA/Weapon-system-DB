@@ -34,11 +34,10 @@
         [MaxLength(150)]
         public string Description { get; set; }
 
-        public ushort RelaseYear { get; set; }
+        public ushort? RelaseYear { get; set; }
 
-        public int? ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
+        [MaxLength(150)]
+        public string ImageUrl { get; set; }
 
         public virtual ICollection<Target> Targets
         {
