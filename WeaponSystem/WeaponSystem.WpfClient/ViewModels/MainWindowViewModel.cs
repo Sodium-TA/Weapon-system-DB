@@ -92,7 +92,7 @@ namespace WeaponSystem.WpfClient.ViewModels
                 var agent = new ZippedXlsToMsSqlAgent();
 
                 var msgWC = await agent.TransferWeapons();
-                this.UniversalButttonText = "Lest's mess with some reports";
+                this.UniversalButttonText = "Let's mess with some reports";
 
                 this.IsUniversalButtonActive = true;
                 this.step = 4;
@@ -113,7 +113,7 @@ namespace WeaponSystem.WpfClient.ViewModels
 
                 await repo.CreteDb();
 
-                this.UniversalButttonText = "Get data from MongpDB";
+                this.UniversalButttonText = "Get data from MongoDB";
                 this.IsUniversalButtonActive = true;
                 this.step = 2;
             }

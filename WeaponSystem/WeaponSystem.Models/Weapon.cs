@@ -39,6 +39,10 @@ namespace WeaponSystem.Models
 
         public ushort? RelaseYear { get; set; }
 
+        public int? CaliberId { get; set; }
+
+        public virtual Caliber Caliber { get; set; }
+
         [MaxLength(150)]
         public string ImageUrl { get; set; }
 
