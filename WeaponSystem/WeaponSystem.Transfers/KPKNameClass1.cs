@@ -17,6 +17,7 @@
            var weaponsCat = db.WeaponCategoies.ToList();
            var manufacturers = db.Manufacturers.ToList();
            var calibers = db.Calibers.ToList();
+           var weaponType = db.WeaponTypes.ToList();
 
 
            foreach (var collection in megaCollection)
@@ -36,8 +37,7 @@
                    weapon.Description = null;
                    weapon.RelaseYear = 0;
                    weapon.WeaponCategory = Parser.GetCategory(weaponsCat, weaponCategory);
-                   weapon.ManufacturerId = null;
-                   weapon.WeaponType = Parser.GetWeaponType(weaponCategory);
+                   weapon.WeaponType = Parser.GetWeaponType(weaponType, weaponCategory);
                    weapon.ImageUrl = weaponImage;
                    weapon.Targets = null;
                    weapon.Caliber = Parser.GetCaliber(calibers, weaponCaliber);
@@ -66,6 +66,26 @@
                if (!db.Calibers.Any(x => x.Name == caliber.Name))
                {
                    db.Calibers.Add(caliber);
+               }
+           }
+
+           db.SaveChanges();
+       }
+
+       public static void AddWeaponTypes()
+       {
+           var db = new WeaponSystemContext();
+
+           var weaponTypeCollection = XmlReader.ReadXmlCollectionFromFile("../../../../Weapons Source Data/WeaponTypes.xml");
+
+           foreach (var weaponTypeItem in weaponTypeCollection)
+           {
+               var weaponType = new WeaponType();
+               weaponType.Name = weaponTypeItem[0];
+
+               if (!db.WeaponTypes.Any(x => x.Name == weaponType.Name))
+               {
+                   db.WeaponTypes.Add(weaponType);
                }
            }
 

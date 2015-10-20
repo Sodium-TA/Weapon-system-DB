@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<types>
+  <type>
+    <name>Close Range</name>
+  </type>
+  <type>
+    <name>Medium Range</name>
+  </type>
+  <type>
+    <name>Long Range</name>
+  </type>
+</types> 

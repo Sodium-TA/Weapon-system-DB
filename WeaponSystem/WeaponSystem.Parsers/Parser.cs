@@ -1,4 +1,7 @@
-﻿namespace WeaponSystem.Parsers
+﻿using System.Linq;
+using WeaponSystem.MsSql.Data;
+
+namespace WeaponSystem.Parsers
 {
     using System.Collections.Generic;
     using Models;
@@ -44,17 +47,21 @@
             return null;
         }
 
-        public static WeaponType GetWeaponType(string weaponCategory)
+        public static WeaponType GetWeaponType(List<WeaponType> weaponTypes, string weaponCategory)
         {
+            var closeRangeType = weaponTypes.Find(x => x.Name == "Close Range");
+            var mediumRangeType = weaponTypes.Find(x => x.Name == "Medium Range");
+            var longRangeType = weaponTypes.Find(x => x.Name == "Long Range");
+
             switch (weaponCategory)
             {
-                case "Pistols": return WeaponType.CloseRange;
-                case "Shotguns": return WeaponType.CloseRange;
-                case "Submachene Guns": return WeaponType.CloseRange;
-                case "Rifles": return WeaponType.MediumRange;
-                case "Machine Guns": return WeaponType.MediumRange;
-                case "Sniper Rifles": return WeaponType.LongRange;
-                default: return WeaponType.CloseRange;
+                case "Pistols": return closeRangeType;
+                case "Shotguns": return closeRangeType;
+                case "Submachene Guns": return closeRangeType;
+                case "Rifles": return mediumRangeType;
+                case "Machine Guns": return mediumRangeType;
+                case "Sniper Rifles": return longRangeType;
+                default: return null;
             }
         }
     }

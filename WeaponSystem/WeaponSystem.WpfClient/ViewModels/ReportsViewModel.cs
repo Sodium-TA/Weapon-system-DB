@@ -71,7 +71,7 @@
                 var reporter = new ReportPdf();
                 var msg = reporter.GeneratePdfReport();
 
-                MessageBox.Show(msg);
+                MessageBox.Show(msg.Result);
             }
             catch (Exception ex)
             {

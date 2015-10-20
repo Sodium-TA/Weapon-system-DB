@@ -22,7 +22,7 @@ namespace WeaponSystem.Models
  
         public string Name { get; set; }
 
-        public int TypeId { get; set; }
+        public int? WeaponTypeId { get; set; }
 
         public virtual WeaponType WeaponType { get; set; }
 
