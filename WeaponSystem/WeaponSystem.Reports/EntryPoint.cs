@@ -10,10 +10,10 @@
 
         public static void Main()
         {
-/*            // PDF
+            // PDF
             var pdfReport = new ReportPdf();
             pdfReport.GeneratePdfReport();
-            Console.WriteLine(PdfSuccessMessage);*/
+            Console.WriteLine(PdfSuccessMessage);
 
             // XML
             var xmlReport = new ReportXml();
