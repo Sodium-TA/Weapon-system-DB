@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.MongoDb.Data
+﻿using System;
+
+namespace WeaponSystem.MongoDb.Data
 {
     using System.Collections.Generic;
     using System.Data;
@@ -20,6 +22,7 @@
         private static readonly IMongoCollection<BsonDocument> TargetsCategoriesCollection = Database.GetCollection<BsonDocument>("TargetCategories");
         private static readonly IMongoCollection<BsonDocument> CountriesCollection = Database.GetCollection<BsonDocument>("Countries");
         private static readonly IMongoCollection<BsonDocument> ManufacturersCollection = Database.GetCollection<BsonDocument>("Manufacturers");
+        private static readonly IMongoCollection<BsonDocument> Targets = Database.GetCollection<BsonDocument>("Targets");
 
         public async Task<IList<WeaponCategory>> GetWeaponCategories()
         {
@@ -52,6 +55,26 @@
                 .Select(bs => BsonSerializer.Deserialize<Manufacturer>(bs)).ToList();
 
             return manufacturers;
+        }
+
+        public async Task<string> InsertTargets(List<List<string>> targets)
+        {
+            var basonCollection = new List<BsonDocument>();
+
+            foreach (var target in targets)
+            {
+                var newTar = new BsonDocument
+            {
+                {"Name", target[0]},
+                {"TargetCategory", target[1]}
+            };
+
+                basonCollection.Add(newTar);
+            }
+
+            await Targets.InsertManyAsync(basonCollection);
+
+            return "erfe";
         }
     }
 }

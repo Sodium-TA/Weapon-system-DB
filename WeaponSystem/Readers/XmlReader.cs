@@ -14,7 +14,7 @@
             var weaponsCollection = new List<List<string>>();
 
             var xmlDoc = XDocument.Parse(xmlAsString);
-            var element = xmlDoc.Descendants();
+            var element = xmlDoc.Descendants().Skip(1);
 
 
             foreach (var collection in element)

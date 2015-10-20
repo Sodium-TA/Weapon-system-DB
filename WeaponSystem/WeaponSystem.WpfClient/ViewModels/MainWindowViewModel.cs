@@ -76,10 +76,36 @@ namespace WeaponSystem.WpfClient.ViewModels
                 case 3:
                     this.GetZipDataCommand(null);
                     break;
-                case 4: this.PageSwitcher.Switch(ViewSelector.Reports);
+                case 4:
+                    this.GetXmlAndFillSqlAndMongoDb(null);
+                    break;
+                case 5:
+                    this.PageSwitcher.Switch(ViewSelector.Reports);
                     break;
                 default:
                     break;
+            }
+        }
+
+        private async void GetXmlAndFillSqlAndMongoDb(object parameter)
+        {
+            try
+            {
+                this.IsUniversalButtonActive = false;
+                this.UniversalButttonText = "...getting data from XML and inserting to Sql and MongoDb..";
+
+                var agent = new XmlToMsSqlAndMongoDbAgent();
+
+                var msg = await agent.GetXmlData();
+
+                this.UniversalButttonText = "Let's mess with some reports";
+
+                this.IsUniversalButtonActive = true;
+                this.step = 5;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Xml to MsSql and MongoDb");
             }
         }
 
@@ -92,7 +118,7 @@ namespace WeaponSystem.WpfClient.ViewModels
                 var agent = new ZippedXlsToMsSqlAgent();
 
                 var msgWC = await agent.TransferWeapons();
-                this.UniversalButttonText = "Let's mess with some reports";
+                this.UniversalButttonText = "Get XML data and transfer to MsSql and MongoDb";
 
                 this.IsUniversalButtonActive = true;
                 this.step = 4;
@@ -106,7 +132,8 @@ namespace WeaponSystem.WpfClient.ViewModels
         private async void HandleCreateSqlDCommand(object parameter)
         {
             try
-            {   this.IsUniversalButtonActive = false;
+            {
+                this.IsUniversalButtonActive = false;
                 this.UniversalButttonText = "...Creating MS SQL DB...";
 
                 var repo = new MsSqlRepo();

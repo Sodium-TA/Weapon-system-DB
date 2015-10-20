@@ -23,6 +23,7 @@
                 var megaCollection = ExcelReader.GetExcelFilesAsCollection("../../../../Weapons Source Data/w.zip");
                 var weaponsCat = db.WeaponCategoies.ToList();
                 var manufacturers = db.Manufacturers.ToList();
+                var calibers = db.Calibers.ToList();
 
                 foreach (var collection in megaCollection)
                 {
@@ -39,13 +40,13 @@
                         weapon.WeaponType = WeaponType.CloseRange;
                         weapon.ImageUrl = weaponItem[4];
                         weapon.Targets = null;
+                        weapon.Caliber = GetCaliber(calibers, weaponItem[3]);
+                        db.Weapons.Add(weapon);
 
-                        if (!db.Weapons.Any(w => w.Name == weapon.Name))
+                        if (!db.Weapons.Any(w => w.Name == weapon.Name) && weapon.Name.Length <= 50)
                         {
                             db.Weapons.Add(weapon);
                         }
-
-                        Console.WriteLine(weapon.Name);
                     }
 
                     i++;
@@ -58,7 +59,20 @@
 
         }
 
-        private WeaponCategory GetCategory(List<WeaponCategory> categoryCollection, string weaponCategoryName)
+        private static Caliber GetCaliber(List<Caliber> calibersCollection, string caliberSize)
+        {
+            foreach (var caliber in calibersCollection)
+            {
+                if (caliber.Name == caliberSize)
+                {
+                    return caliber;
+                }
+            }
+
+            return null;
+        }
+
+        private static WeaponCategory GetCategory(List<WeaponCategory> categoryCollection, string weaponCategoryName)
         {
             foreach (var category in categoryCollection)
             {
@@ -71,7 +85,7 @@
             return null;
         }
 
-        private Manufacturer GetManufacturer(List<Manufacturer> manufacturerCollection, string manufacturerName)
+        private static Manufacturer GetManufacturer(List<Manufacturer> manufacturerCollection, string manufacturerName)
         {
             foreach (var manufacturer in manufacturerCollection)
             {
