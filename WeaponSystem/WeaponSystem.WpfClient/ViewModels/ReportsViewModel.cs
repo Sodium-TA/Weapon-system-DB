@@ -1,4 +1,6 @@
-﻿namespace WeaponSystem.WpfClient.ViewModels
+﻿using WeaponSystem.ExcelData;
+
+namespace WeaponSystem.WpfClient.ViewModels
 {
     using System;
     using System.Windows.Forms;
@@ -68,10 +70,10 @@
             // PUT REPORTS TO MYSQL METHODS HERE!!!!
             try
             {
-                var reporter = new ReportMySQL();
-                var msg = await reporter.GenerateMySQLReport();
+                var reporter = new MagicMessMaker();
+                var msg = await reporter.MessWithFinessSqlLiteToExcelHArd();
 
-                MessageBox.Show(msg.Result);
+                MessageBox.Show(msg);
             }
             catch (Exception ex)
             {

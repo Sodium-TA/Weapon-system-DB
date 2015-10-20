@@ -39,7 +39,7 @@
             Byte[] bin = excelPackage.GetAsByteArray();
             string file = filePath + filename + extenstion;
             File.WriteAllBytes(file, bin);
-            Console.WriteLine(file + " written!");
+           // Console.WriteLine(file + " written!");
         }
 
 

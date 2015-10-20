@@ -58,7 +58,7 @@
                      Command="{Binding GenerateXmlReport}"
                     />
 
-            <Button  Content="Mess MySql Reports"  
+            <Button  Content="Mess party with SqlLite and Excel"  
                      Style="{StaticResource CommonButton}"
                      Command="{Binding GenerateReportsToMySql}"
                     />
