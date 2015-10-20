@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KPKNameClass1.cs" />
     <Compile Include="MongoDbToMsSqlAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlToMsSqlAndMongoDbAgent.cs" />
@@ -72,13 +73,13 @@
       <Project>{bedd08a9-40e4-41bb-8abb-755aa18f9afd}</Project>
       <Name>WeaponSystem.MsSql.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeaponSystem.Parsers\WeaponSystem.Parsers.csproj">
+      <Project>{d4aee1b1-b686-4b8c-b58e-2deef31191c2}</Project>
+      <Name>WeaponSystem.Parsers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WeaponSystem.Reports\WeaponSystem.Reports.csproj">
       <Project>{05eb8cec-2a4b-4406-af07-50ad296c87e1}</Project>
       <Name>WeaponSystem.Reports</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WeaponSystem.TestConsoleClient\WeaponSystem.TestConsoleClient.csproj">
-      <Project>{cb187dbb-015d-4e27-ba10-d2fc2bc17a2c}</Project>
-      <Name>WeaponSystem.TestConsoleClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
