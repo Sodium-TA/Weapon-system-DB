@@ -58,7 +58,7 @@
             }
         }
 
-        public static void CreateDataRow(ExcelWorksheet Worksheet, int rowIndex , IEnumerable rowData)
+        public static void CreateDataRow(ExcelWorksheet Worksheet, int rowIndex , IEnumerable rowData, bool isHeader = false)
         {
             var columnIndex = 1;
             ExcelRange cell;
@@ -66,15 +66,20 @@
             {
                 cell = Worksheet.Cells[rowIndex, columnIndex];
                 cell.Value = data;
+                if (isHeader)
+                {
+                    cell.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    cell.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                }
                 columnIndex++;
             }
         }
 
 
-        public static void CreateData(ExcelWorksheet worksheet, DataTable dataTable)
+        public static void CreateData(ExcelWorksheet worksheet,  int startRowIndex, DataTable dataTable)
         {
+            int rowIndex = startRowIndex;
             int colIndex = 1;
-            int rowIndex = 1;
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 colIndex = 1;
