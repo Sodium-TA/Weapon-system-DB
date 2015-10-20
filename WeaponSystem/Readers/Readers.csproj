@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="ExcelReader.cs" />
     <Compile Include="FileUnziper.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlReader.cs" />
   </ItemGroup>
