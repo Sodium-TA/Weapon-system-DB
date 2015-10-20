@@ -16,37 +16,45 @@
 
         public async Task<string> GenerateMySQLReport()
         {
+
+            var list = new List<JObject>();
+            using (WeaponSystemContext msSqlServerContext = new WeaponSystemContext())
+            {
+                await msSqlServerContext
+                    .Weapons
+                    .Select(w => new
+                    {
+                        Id = w.Id,
+                        Name = w.Name,
+                        Manufacturer = w.Manufacturer.Name
+                    })
+                    .ForEachAsync(w =>
+                        list.Add(CreateJObject(w.Id, w.Name, w.Manufacturer))
+                    );
+            }
+
             using (WeaponReportsDbContext MySqlServerContext = new WeaponReportsDbContext())
             {
-                var list = new List<JObject>();
-                using (WeaponSystemContext msSqlServerContext = new WeaponSystemContext())
-                {
-                    await msSqlServerContext
-                        .Weapons
-                        .Select(w => new
-                        {
-                            Id = w.Id.ToString(),
-                            Name = w.Name.ToString(),
-                            Manufacturer = w.Manufacturer.Name.ToString()
-                        })
-                        .ForEachAsync(w =>
-                            list.Add(CreateJObject(w.Id, w.Name, w.Manufacturer))
-                        );
-                }
-
                 MySqlActions.AddReports(list, MySqlServerContext);
             }
 
             return MySQLSuccessMessage;
         }
 
-        private JObject CreateJObject(string id, string name, string manufacturer)
+        private JObject CreateJObject(int id, string name, string manufacturer)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "[null]";
+            }
+            if (string.IsNullOrEmpty(manufacturer))
+            {
+                manufacturer = "[null]";
+            }
             var jsonObject = new JObject(
-                 new JProperty("weapon-id", id),
-                 new JProperty("weapon-name", name),
-                 new JProperty("manufacturer", manufacturer));
-
+                 new JProperty("WeaponID", id.ToString()),
+                 new JProperty("WeaponName", name),
+                 new JProperty("Manufacturer", manufacturer));
             return jsonObject;
         }
     }
