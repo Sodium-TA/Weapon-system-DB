@@ -24,32 +24,39 @@
             var writer = PdfWriter.GetInstance(document, fs);
             document.Open();
 
-            var table = new PdfPTable(3)
+            var table = new PdfPTable(4)
             {
                 TotalWidth = 545f,
                 LockedWidth = true
             };
 
-            float[] widths = { 0.5f, 0.75f, 0.75f };
+            float[] widths = { 1f, 0.75f, 0.75f, 0.75f };
             table.SetWidths(widths);
 
             table.SpacingBefore = 20f;
             table.SpacingAfter = 30f;
 
-            var cellTitle =
-                new PdfPCell(new Phrase("FULL LIST OF WEAPONS", new Font(Font.FontFamily.HELVETICA, FontSize + 20, Font.BOLD)))
+            var header =
+                new PdfPCell(new Phrase("WEAPONS CHEATSHEET", new Font(Font.FontFamily.HELVETICA, FontSize + 20, Font.BOLD)))
                 {
-                    Colspan = 3,
+                    Colspan = 4,
                     HorizontalAlignment = 1,
                     PaddingBottom = 14f,
-                    PaddingLeft = 10f,
                     PaddingTop = 14f
                 };
 
-            table.AddCell(cellTitle);
+            table.AddCell(header);
+
+            var cellTitle1 =
+                new PdfPCell(new Phrase("Thumb", new Font(Font.FontFamily.HELVETICA, FontSize + 5, Font.BOLD)))
+                {
+                    Padding = 4f
+                };
+
+            table.AddCell(cellTitle1);
 
             var cellTitle2 =
-                new PdfPCell(new Phrase("Weapon Id", new Font(Font.FontFamily.HELVETICA, FontSize + 10, Font.BOLD)))
+                new PdfPCell(new Phrase("Weapon Name", new Font(Font.FontFamily.HELVETICA, FontSize + 5, Font.BOLD)))
                 {
                     PaddingBottom = 10f,
                     PaddingLeft = 10f,
@@ -59,7 +66,7 @@
             table.AddCell(cellTitle2);
 
             var cellTitle3 =
-                new PdfPCell(new Phrase("Weapon Name", new Font(Font.FontFamily.HELVETICA, FontSize + 10, Font.BOLD)))
+                new PdfPCell(new Phrase("Manufacturer", new Font(Font.FontFamily.HELVETICA, FontSize + 5, Font.BOLD)))
                 {
                     PaddingBottom = 10f,
                     PaddingLeft = 10f,
@@ -69,7 +76,7 @@
             table.AddCell(cellTitle3);
 
             var cellTitle4 =
-                new PdfPCell(new Phrase("Manufacturer", new Font(Font.FontFamily.HELVETICA, FontSize + 10, Font.BOLD)))
+                new PdfPCell(new Phrase("Category", new Font(Font.FontFamily.HELVETICA, FontSize + 5, Font.BOLD)))
                 {
                     PaddingBottom = 10f,
                     PaddingLeft = 10f,
@@ -84,28 +91,27 @@
             {
                 var weaponsInfo =
                     from weapon in msSqlServerContext.Weapons
+                    join category in msSqlServerContext.WeaponCategoies
+                    on weapon.WeaponCategoryId equals category.Id
                     join manufacturer in msSqlServerContext.Manufacturers
                     on weapon.ManufacturerId equals manufacturer.Id
+                    
                     select new
                     {
-                        WeaponId = weapon.Id,
                         WeaponName = weapon.Name,
-                        Manufacturer = manufacturer.Name
+                        Category = category.Name,
+                        Manufacturer = manufacturer.Name,
+                        Picture = weapon.ImageUrl
                     };
 
                 foreach (var weapon in weaponsInfo)
                 {
-                    var cellProduct =
-                        new PdfPCell(
-                            new Phrase(
-                                weapon.WeaponId.ToString(),
-                                new Font(Font.FontFamily.HELVETICA, FontSize, Font.NORMAL)))
-                        {
-                            PaddingBottom = 10f,
-                            PaddingLeft = 10f,
-                            PaddingTop = 4f
-                        };
-                    table.AddCell(cellProduct);
+                    var cellProduct1 =
+                        new PdfPCell(Image.GetInstance(weapon.Picture), true);
+                    cellProduct1.PaddingBottom = 10f;
+                    cellProduct1.PaddingLeft = 10f;
+                    cellProduct1.PaddingTop = 4f;
+                    table.AddCell(cellProduct1);
 
                     var cellProduct2 =
                         new PdfPCell(new Phrase(weapon.WeaponName, new Font(Font.FontFamily.HELVETICA, FontSize, Font.NORMAL)));
@@ -120,6 +126,13 @@
                     cellProduct3.PaddingLeft = 10f;
                     cellProduct3.PaddingTop = 4f;
                     table.AddCell(cellProduct3);
+
+                    var cellProduct4 =
+                        new PdfPCell(new Phrase(weapon.Category, new Font(Font.FontFamily.HELVETICA, FontSize, Font.NORMAL)));
+                    cellProduct4.PaddingBottom = 10f;
+                    cellProduct4.PaddingLeft = 10f;
+                    cellProduct4.PaddingTop = 4f;
+                    table.AddCell(cellProduct4);   
                 }
 
                 document.Add(table);
