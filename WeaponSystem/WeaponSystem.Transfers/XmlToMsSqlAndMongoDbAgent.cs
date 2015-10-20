@@ -44,7 +44,7 @@ namespace WeaponSystem.Transfers
                         Where(c => c.Name == targetItemName)
                         .FirstOrDefault();
                   
-                    if (id == null && !db.Targets.Any(t => t.Name == target.Name))
+                    if (id != null && !db.Targets.Any(t => t.Name == target.Name))
                     {
                         target.Name = targetItem[0];
                         target.TargetCategoryId = id.Id;
