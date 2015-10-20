@@ -10,16 +10,16 @@
 
         public static void Main()
         {
-            // PDF
+/*            // PDF
             var pdfReport = new ReportPdf();
             pdfReport.GeneratePdfReport();
-            Console.WriteLine(PdfSuccessMessage);
+            Console.WriteLine(PdfSuccessMessage);*/
 
-/*            // XML
+            // XML
             var xmlReport = new ReportXml();
             xmlReport.GenerateXmlReport();
             Console.WriteLine(XmlSuccessMessage);
-
+/*
             // JSON
             var jsonReport = new ReportJson();
             jsonReport.GenerateJsonReport();
