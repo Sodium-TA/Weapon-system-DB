@@ -90,6 +90,10 @@
       <Project>{d4aee1b1-b686-4b8c-b58e-2deef31191c2}</Project>
       <Name>WeaponSystem.Parsers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeaponSystem.Transfers\WeaponSystem.Transfers.csproj">
+      <Project>{310adffb-fced-4334-86ca-afb3905b2363}</Project>
+      <Name>WeaponSystem.Transfers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calibers.xml" />

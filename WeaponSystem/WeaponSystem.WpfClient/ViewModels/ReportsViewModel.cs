@@ -118,12 +118,12 @@
             }
         }
 
-        private void HandleGeneratePdfReportCommand(object parameter)
+        private async void HandleGeneratePdfReportCommand(object parameter)
         {
             try
             {
                 var reporter = new ReportPdf();
-                var msg = reporter.GeneratePdfReport();
+                var msg = await reporter.GeneratePdfReport();
 
                 MessageBox.Show(msg);
             }

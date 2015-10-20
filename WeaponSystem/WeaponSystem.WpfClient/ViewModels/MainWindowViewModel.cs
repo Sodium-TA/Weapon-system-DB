@@ -117,7 +117,9 @@ namespace WeaponSystem.WpfClient.ViewModels
 
                 var agent = new ZippedXlsToMsSqlAgent();
 
+                var msgCal = await agent.TransferCalibers();
                 var msgWC = await agent.TransferWeapons();
+                
                 this.UniversalButttonText = "Get XML data and transfer to MsSql and MongoDb";
 
                 this.IsUniversalButtonActive = true;

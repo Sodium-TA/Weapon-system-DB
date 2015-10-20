@@ -11,9 +11,9 @@
         public static void Main()
         {
             // PDF
-            var pdfReport = new ReportPdf();
-            pdfReport.GeneratePdfReport();
-            Console.WriteLine(PdfSuccessMessage);
+           // var pdfReport = new ReportPdf();
+            //pdfReport.GeneratePdfReport();
+           // Console.WriteLine(PdfSuccessMessage);
 
             // XML
             var xmlReport = new ReportXml();
