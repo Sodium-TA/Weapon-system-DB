@@ -70,9 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Readers\Readers.csproj">
+    <ProjectReference Include="..\Readers\WeaponSystem.Readers.csproj">
       <Project>{25902b68-ed87-4e9a-bbe8-615e288fb7f8}</Project>
-      <Name>Readers</Name>
+      <Name>WeaponSystem.Readers</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeaponSystem.Models\WeaponSystem.Models.csproj">
       <Project>{346d4ee3-8cbd-4884-9d1b-95ebf17c02d2}</Project>
@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calibers.xml" />
+    <Content Include="WeaponTypes.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

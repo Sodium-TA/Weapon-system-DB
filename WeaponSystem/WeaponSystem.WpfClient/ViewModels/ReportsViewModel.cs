@@ -71,7 +71,7 @@
                 var reporter = new ReportMySQL();
                 var msg = await reporter.GenerateMySQLReport();
 
-                MessageBox.Show(msg);
+                MessageBox.Show(msg.Result);
             }
             catch (Exception ex)
             {
