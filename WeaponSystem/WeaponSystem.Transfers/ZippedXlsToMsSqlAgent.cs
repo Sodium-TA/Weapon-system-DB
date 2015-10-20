@@ -15,51 +15,19 @@
     {
         private const string MessageEnd = " from zipped .xls transfered to MsSQL!";
 
+        public async Task<string> TransferCalibers()
+        {
+            KPKNameClass1.AddCalibers();
+
+            return "Calibers" + MessageEnd;
+        }
+
         public async Task<string> TransferWeapons(string path = "put default path here")
         {
             KPKNameClass1.AddWeapons();
 
             return "Weapons" + MessageEnd;
 
-        }
-
-        private static Caliber GetCaliber(List<Caliber> calibersCollection, string caliberSize)
-        {
-            foreach (var caliber in calibersCollection)
-            {
-                if (caliber.Name == caliberSize)
-                {
-                    return caliber;
-                }
-            }
-
-            return null;
-        }
-
-        private static WeaponCategory GetCategory(List<WeaponCategory> categoryCollection, string weaponCategoryName)
-        {
-            foreach (var category in categoryCollection)
-            {
-                if (category.Name == weaponCategoryName)
-                {
-                    return category;
-                }
-            }
-
-            return null;
-        }
-
-        private static Manufacturer GetManufacturer(List<Manufacturer> manufacturerCollection, string manufacturerName)
-        {
-            foreach (var manufacturer in manufacturerCollection)
-            {
-                if (manufacturer.Name == manufacturerName)
-                {
-                    return manufacturer;
-                }
-            }
-
-            return null;
         }
     }
 }

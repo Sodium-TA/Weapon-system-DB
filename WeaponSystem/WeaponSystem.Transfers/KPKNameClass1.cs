@@ -1,6 +1,5 @@
 ﻿namespace WeaponSystem.Transfers
 {
-    using System;
     using System.Linq;
     using Readers;
     using Models;
