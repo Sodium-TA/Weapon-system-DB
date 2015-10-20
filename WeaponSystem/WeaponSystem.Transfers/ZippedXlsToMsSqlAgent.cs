@@ -29,5 +29,12 @@
             return "Weapons" + MessageEnd;
 
         }
+
+        public async Task<string> TransferWeaponTypes()
+        {
+            KPKNameClass1.AddWeaponTypes();
+
+            return "Weapon types" + MessageEnd;
+        }
     }
 }

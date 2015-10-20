@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="ReportJson.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="ReportMySQL.cs" />
     <Compile Include="ReportPdf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportXml.cs" />
@@ -69,6 +70,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Weapons.MySql.ConsoleClient\Weapons.MySqlDb.Actions.csproj">
+      <Project>{67f79434-d3de-4f8c-9829-c767c6cb265b}</Project>
+      <Name>Weapons.MySqlDb.Actions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weapons.MySql.Data\Weapons.MySqlDb.Data.csproj">
+      <Project>{a8aadcbd-865d-4376-ad61-f7023325fde3}</Project>
+      <Name>Weapons.MySqlDb.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weapons.MySql.Models\Weapons.MySqlDb.Models.csproj">
+      <Project>{78fccf99-3a63-4ba1-9666-66451511eb50}</Project>
+      <Name>Weapons.MySqlDb.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WeaponSystem.Models\WeaponSystem.Models.csproj">
       <Project>{346d4ee3-8cbd-4884-9d1b-95ebf17c02d2}</Project>
       <Name>WeaponSystem.Models</Name>

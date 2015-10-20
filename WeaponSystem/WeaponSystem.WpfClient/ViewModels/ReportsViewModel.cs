@@ -66,6 +66,17 @@
         private void HandleGenerateReportsToMySqlCommand(object parameter)
         {
             // PUT REPORTS TO MYSQL METHODS HERE!!!!
+            try
+            {
+                var reporter = new ReportPdf();
+                var msg = reporter.GeneratePdfReport();
+
+                MessageBox.Show(msg.Result);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Json report");
+            }
         }
 
         public ICommand GeneratePdfReport
