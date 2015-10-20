@@ -63,6 +63,11 @@
                      Command="{Binding GenerateReportsToMySql}"
                     />
 
+            <Button  Content="Mess with MySql"  
+                     Style="{StaticResource CommonButton}"
+                     Command="{Binding GenerateReportsOMRMySql}"
+                    />
+
             <Button  Content="Quit" 
                      Style="{StaticResource CommonButton}"
                      Command="{Binding QuitApplication}"/>

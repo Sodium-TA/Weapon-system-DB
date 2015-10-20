@@ -1,4 +1,5 @@
 ﻿using WeaponSystem.ExcelData;
+using WeaponSystem.MySql.OpenAccess;
 
 namespace WeaponSystem.WpfClient.ViewModels
 {
@@ -17,6 +18,7 @@ namespace WeaponSystem.WpfClient.ViewModels
         private ICommand generateJsonReportCommand;
         private ICommand generateXmlReportCommand;
         private ICommand generateReportsToMySqlCommand;
+        private ICommand generateReportsOMRMySql;
 
         private bool isGetMOngoDataActive = false;
         private bool isCreateMsSqlActive = true;
@@ -52,6 +54,39 @@ namespace WeaponSystem.WpfClient.ViewModels
                 this.OnPropertyChanged("IsUniversalButtonActive");
             }
         }
+
+        
+
+                public ICommand GenerateReportsOMRMySql
+        {
+            get
+            {
+                if (this.generateReportsOMRMySql == null)
+                {
+                    this.generateReportsOMRMySql = new RelayCommand(this.HandleGenerateReportsOMRMySqllCommand);
+                }
+
+                return this.generateReportsOMRMySql;
+            }
+        }
+
+        private void HandleGenerateReportsOMRMySqllCommand(object parameter)
+        {
+           
+
+            try
+            {
+                var repo = new MySqlRepo();
+                repo.UpdateDatabase();
+
+                repo.ImportDbDataFromJson("../../../../Generated Reports/JSON/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MySql report");
+            }
+        }
+
         public ICommand GenerateReportsToMySql
         {
             get
@@ -77,7 +112,7 @@ namespace WeaponSystem.WpfClient.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "MySql report");
+                MessageBox.Show(ex.Message, "SqlLite report");
             }
         }
 

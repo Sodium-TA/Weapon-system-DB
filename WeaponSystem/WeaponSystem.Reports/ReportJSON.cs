@@ -37,8 +37,8 @@
             string reportLocation = "../../../../Generated Reports/JSON/";
 
             var jsonObject = new JObject(
-                 new JProperty("weapon-id", id),
-                 new JProperty("weapon-name", name),
+                 new JProperty("weaponId", id),
+                 new JProperty("weaponName", name),
                  new JProperty("manufacturer", manufacturer));
 
             string filePath = Path.Combine(reportLocation, string.Format("{0}.json", id));
