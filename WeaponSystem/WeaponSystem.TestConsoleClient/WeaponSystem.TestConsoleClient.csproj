@@ -86,6 +86,10 @@
       <Project>{bedd08a9-40e4-41bb-8abb-755aa18f9afd}</Project>
       <Name>WeaponSystem.MsSql.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeaponSystem.Parsers\WeaponSystem.Parsers.csproj">
+      <Project>{d4aee1b1-b686-4b8c-b58e-2deef31191c2}</Project>
+      <Name>WeaponSystem.Parsers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calibers.xml" />

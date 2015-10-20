@@ -19,7 +19,7 @@ namespace WeaponSystem.Models
 
         [MaxLength(50)]
         [Required]
-        [Index(IsUnique = true)]
+ 
         public string Name { get; set; }
 
         public int TypeId { get; set; }
