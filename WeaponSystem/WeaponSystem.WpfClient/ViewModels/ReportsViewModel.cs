@@ -14,6 +14,7 @@
         private ICommand generatePdfReportCommand;
         private ICommand generateJsonReportCommand;
         private ICommand generateXmlReportCommand;
+        private ICommand generateReportsToMySqlCommand;
 
         private bool isGetMOngoDataActive = false;
         private bool isCreateMsSqlActive = true;
@@ -48,6 +49,23 @@
                 this.isUniversalButtonActive = value;
                 this.OnPropertyChanged("IsUniversalButtonActive");
             }
+        }
+        public ICommand GenerateReportsToMySql
+        {
+            get
+            {
+                if (this.generateReportsToMySqlCommand == null)
+                {
+                    this.generateReportsToMySqlCommand = new RelayCommand(this.HandleGenerateReportsToMySqlCommand);
+                }
+
+                return this.generateReportsToMySqlCommand;
+            }
+        }
+
+        private void HandleGenerateReportsToMySqlCommand(object parameter)
+        {
+            // PUT REPORTS TO MYSQL METHODS HERE!!!!
         }
 
         public ICommand GeneratePdfReport

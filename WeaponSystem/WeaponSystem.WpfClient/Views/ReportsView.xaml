@@ -58,6 +58,11 @@
                      Command="{Binding GenerateXmlReport}"
                     />
 
+            <Button  Content="Mess MySql Reports"  
+                     Style="{StaticResource CommonButton}"
+                     Command="{Binding GenerateReportsToMySql}"
+                    />
+
             <Button  Content="Quit" 
                      Style="{StaticResource CommonButton}"
                      Command="{Binding QuitApplication}"/>
