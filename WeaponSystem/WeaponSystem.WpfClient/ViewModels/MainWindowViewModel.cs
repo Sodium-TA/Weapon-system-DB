@@ -117,6 +117,7 @@ namespace WeaponSystem.WpfClient.ViewModels
 
                 var agent = new ZippedXlsToMsSqlAgent();
 
+                var msgWp = await agent.TransferWeaponTypes();
                 var msgCal = await agent.TransferCalibers();
                 var msgWC = await agent.TransferWeapons();
                 

@@ -1,9 +1,19 @@
 ﻿namespace WeaponSystem.Models
 {
-    public enum WeaponType
+    using System.ComponentModel.DataAnnotations;
+
+    public class WeaponType
     {
-        CloseRange = 1,
-        MediumRange = 2,
-        LongRange = 3
+        public WeaponType()
+        {
+            
+        }
+
+        [Key]
+        public int Id { get; set; }
+
+        [MaxLength(50)]
+        [Required]
+        public string Name { get; set; }
     }
 }
