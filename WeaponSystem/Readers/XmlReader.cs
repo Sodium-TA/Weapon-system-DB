@@ -47,26 +47,6 @@
             return weaponsCollection;
         }
 
-        public static List<string> ReadXmlFile(string filePath)
-        {
-            var caliberColletion = new List<string>();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(filePath);
-            var xmlString = doc.InnerXml;
-
-
-            var document = XDocument.Parse(xmlString);
-            var test = document.Descendants().Skip(1);
-
-            foreach (var test1 in test)
-            {
-                caliberColletion.Add(test1.Value);
-            }
-
-            return caliberColletion;
-
-        }
-
         public static List<List<string>> ReadXmlCollectionFromFile(string filePath)
         {
             var targetCollection = new List<List<string>>();

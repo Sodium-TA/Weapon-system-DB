@@ -17,8 +17,10 @@
                     .Weapons
                     .Select(w => new
                     {
+                        Id = w.Id,
                         Name = w.Name,
-                        Manufacturer = w.Manufacturer.Name
+                        Manufacturer = w.Manufacturer.Name,
+                        Category = w.WeaponCategory.Name
                     });
 
             string reportLocation = "../../../../Generated Reports/XML/Report.xml";
@@ -36,8 +38,10 @@
                 foreach (var weapon in queryResult)
                 {
                     writer.WriteStartElement("weapon");
+                    writer.WriteAttributeString("id", weapon.Id.ToString());
                     writer.WriteAttributeString("name", weapon.Name);
                     writer.WriteAttributeString("manufacturer", weapon.Manufacturer);
+                    writer.WriteAttributeString("category", weapon.Category);
 
                     writer.WriteEndElement();
                 }

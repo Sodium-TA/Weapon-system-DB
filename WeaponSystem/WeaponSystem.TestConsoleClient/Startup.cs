@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using WeaponSystem.Models;
+using WeaponSystem.Parsers;
 
 namespace WeaponSystem.TestConsoleClient
 {
@@ -22,15 +23,15 @@ namespace WeaponSystem.TestConsoleClient
 
             db.SaveChanges();
 
-            var caliberCollection = XmlReader.ReadXmlFile("../../../../Weapons Source Data/calibers.xml");
-            var test2 = XmlReader.ReadXmlCollectionFromFile("../../../../Weapons Source Data/targets.xml");
+            //var caliberCollection = XmlReader.ReadXmlCollectionFromFile("../../../../Weapons Source Data/calibers.xml");
+            //var test2 = XmlReader.ReadXmlCollectionFromFile("../../../../Weapons Source Data/targets.xml");
 
-            foreach (var caliberItem in caliberCollection)
-            {
-                var caliber = new Caliber();
-                caliber.Name = caliberItem;
-                db.Calibers.Add(caliber);
-            }
+            //foreach (var caliberItem in caliberCollection)
+            //{
+            //    var caliber = new Caliber();
+            //    caliber.Name = caliberItem[0];
+            //    db.Calibers.Add(caliber);
+            //}
 
             var megaCollection = ExcelReader.GetExcelFilesAsCollection("../../../../Weapons Source Data/w.zip");
 
@@ -46,16 +47,23 @@ namespace WeaponSystem.TestConsoleClient
                 {
                     var weapon = new Weapon();
 
-                    weapon.Name = weaponItem[1];
-                    weapon.Manufacturer = GetManufacturer(manufacturers, weaponItem[2]);
+                    var weaponName = weaponItem[1];
+                    var weaponCategory = weaponItem[0];
+                    var weaponManufacturer = weaponItem[2];
+                    var weaponCaliber = weaponItem[3];
+                    var weaponImage = weaponItem[4];
+
+                    weapon.Name = weaponName;
+                    weapon.Manufacturer = Parser.GetManufacturer(manufacturers, weaponManufacturer);
                     weapon.Description = null;
                     weapon.RelaseYear = 0;
-                    weapon.WeaponCategory = GetCategory(weaponsCat, weaponItem[0]);
+                    weapon.WeaponCategory = Parser.GetCategory(weaponsCat, weaponCategory);
                     weapon.ManufacturerId = null;
-                    weapon.WeaponType = WeaponType.CloseRange;
-                    weapon.ImageUrl = weaponItem[4];
+                    weapon.WeaponType = Parser.GetWeaponType(weaponCategory);
+                    weapon.ImageUrl = weaponImage;
                     weapon.Targets = null;
-                    weapon.Caliber = GetCaliber(calibers, weaponItem[3]);
+                    weapon.Caliber = Parser.GetCaliber(calibers, weaponCaliber);
+
                     db.Weapons.Add(weapon);
 
                     Console.WriteLine(weapon.Name);
@@ -64,45 +72,5 @@ namespace WeaponSystem.TestConsoleClient
 
             db.SaveChanges();
         }
-
-        private static Caliber GetCaliber(List<Caliber> calibersCollection, string caliberSize)
-        {
-            foreach (var caliber in calibersCollection)
-            {
-                if (caliber.Name == caliberSize)
-                {
-                    return caliber;
-                }
-            }
-
-            return null;
-        }
-
-        private static WeaponCategory GetCategory(List<WeaponCategory> categoryCollection, string weaponCategoryName)
-        {
-            foreach (var category in categoryCollection)
-            {
-                if (category.Name == weaponCategoryName)
-                {
-                    return category;
-                }
-            }
-
-            return null;
-        }
-
-        private static Manufacturer GetManufacturer(List<Manufacturer> manufacturerCollection, string manufacturerName)
-        {
-            foreach (var manufacturer in manufacturerCollection)
-            {
-                if (manufacturer.Name == manufacturerName)
-                {
-                    return manufacturer;
-                }
-            }
-
-            return null;
-        }
-
     }
 }
