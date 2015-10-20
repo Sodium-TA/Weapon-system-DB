@@ -63,19 +63,19 @@
             }
         }
 
-        private void HandleGenerateReportsToMySqlCommand(object parameter)
+        private async void HandleGenerateReportsToMySqlCommand(object parameter)
         {
             // PUT REPORTS TO MYSQL METHODS HERE!!!!
             try
             {
-                var reporter = new ReportPdf();
-                var msg = reporter.GeneratePdfReport();
+                var reporter = new ReportMySQL();
+                var msg = await reporter.GenerateMySQLReport();
 
                 MessageBox.Show(msg);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Json report");
+                MessageBox.Show(ex.Message, "MySql report");
             }
         }
 

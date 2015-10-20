@@ -33,7 +33,7 @@
         {
             for (int i = 0; i < reports.Count; i++)
             {
-                if (i +1 == reports.Count)
+                if (i == reports.Count - 1)
                 {
                     AddReport(reports[i], db);
                 }
